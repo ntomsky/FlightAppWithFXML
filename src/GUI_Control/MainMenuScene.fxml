@@ -14,7 +14,7 @@
                   <Font name="Adobe Gurmukhi" size="18.0" />
                </font>
             </Button>
-            <Button fx:id="bookNewFlightBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#toBookNewFlightScene" prefHeight="66.0" prefWidth="233.0" text="Book New Flight">
+            <Button fx:id="bookNewFlightBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#transitionToBookNewFlight" onKeyPressed="#transitionToBookNewFlight" prefHeight="66.0" prefWidth="233.0" text="Book New Flight">
                <font>
                   <Font name="Adobe Gurmukhi" size="18.0" />
                </font>

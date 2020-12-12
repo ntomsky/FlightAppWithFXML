@@ -1,58 +1,80 @@
 package Domain;
 
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class Flight {
-    private Integer flightID;
-    private String departureCity;
-    private String destinationCity;
+    private SimpleIntegerProperty flightID;
+    private SimpleStringProperty airlineName;
+    private SimpleStringProperty departureCity;
+    private SimpleStringProperty arrivalCity;
+    private LocalDate departureDate;
     private LocalTime departureTime;
     private LocalTime arrivalTime;
-    private int airlineID;
+    private SimpleDoubleProperty ticketPrice;
+    public Flight(){}
 
-
-    public Flight(int flightID, String departureCity, String destinationCity, LocalTime departureTime, LocalTime arrivalTime, int airlineID) {
-        this.flightID = flightID;
-        this.departureCity = departureCity;
-        this.destinationCity = destinationCity;
+    public Flight(int flightID, String airlineName, String departureCity, String destinationCity, LocalDate departureDate, LocalTime departureTime, LocalTime arrivalTime, double ticketPrice) {
+        this.flightID = new SimpleIntegerProperty(flightID);
+        this.airlineName = new SimpleStringProperty(airlineName);
+        this.departureCity = new SimpleStringProperty(departureCity);
+        this.arrivalCity = new SimpleStringProperty(destinationCity);
+        this.departureDate = departureDate;
         this.departureTime = departureTime;
         this.arrivalTime = arrivalTime;
-        this.airlineID = airlineID;
+        this.ticketPrice = new SimpleDoubleProperty(ticketPrice);
     }
 
-    public Flight() {
+    public LocalDate getDepartureDate() {
+        return departureDate;
     }
 
-    public static ArrayList<Flight> listOfFlights = new ArrayList<>();
+    public void setDepartureDate(LocalDate departureDate) {
+        this.departureDate = departureDate;
+    }
 
     public int getFlightID() {
+        return flightID.get();
+    }
+
+    public SimpleIntegerProperty flightIDProperty() {
         return flightID;
     }
 
     public void setFlightID(int flightID) {
-        this.flightID = flightID;
+        this.flightID.set(flightID);
+    }
+
+    public String getAirlineName() {
+        return airlineName.get();
+    }
+
+    public SimpleStringProperty airlineNameProperty() {
+        return airlineName;
+    }
+
+    public void setAirlineName(String airlineName) {
+        this.airlineName.set(airlineName);
     }
 
     public String getDepartureCity() {
+        return departureCity.get();
+    }
+
+    public SimpleStringProperty departureCityProperty() {
         return departureCity;
     }
 
     public void setDepartureCity(String departureCity) {
-        this.departureCity = departureCity;
+        this.departureCity.set(departureCity);
     }
 
-    public String getDestinationCity() {
-        return destinationCity;
-    }
-
-    public void setDestinationCity(String destinationCity) {
-        this.destinationCity = destinationCity;
-    }
 
     public LocalTime getDepartureTime() {
         return departureTime;
@@ -70,12 +92,27 @@ public class Flight {
         this.arrivalTime = arrivalTime;
     }
 
-    public int getAirlineID() {
-        return airlineID;
+    public double getTicketPrice() {
+        return ticketPrice.get();
     }
 
-    public void setAirlineID(int airlineID) {
-        this.airlineID = airlineID;
+    public SimpleDoubleProperty ticketPriceProperty() {
+        return ticketPrice;
     }
 
+    public void setTicketPrice(double ticketPrice) {
+        this.ticketPrice.set(ticketPrice);
+    }
+
+    public String getArrivalCity() {
+        return arrivalCity.get();
+    }
+
+    public SimpleStringProperty arrivalCityProperty() {
+        return arrivalCity;
+    }
+
+    public void setArrivalCity(String arrivalCity) {
+        this.arrivalCity.set(arrivalCity);
+    }
 }

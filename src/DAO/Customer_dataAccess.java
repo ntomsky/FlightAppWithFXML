@@ -7,13 +7,13 @@ import java.sql.*;
 import java.util.regex.Pattern;
 
 public class Customer_dataAccess {
-    public static boolean isCredentialValid(String credential, String SQLQuery) throws ClassNotFoundException, SQLException {
+    public static boolean isUsernameValid(String credential) throws ClassNotFoundException, SQLException {
 
         Class.forName("com.mysql.cj.jdbc.Driver");
         Connection connection = DriverManager.getConnection(URL, getDbUserName(),getDbPassword());
         System.out.println("DB Connected");
 
-        PreparedStatement statement = connection.prepareStatement(SQLQuery);
+        PreparedStatement statement = connection.prepareStatement(USERNAME_VALIDATION);
         statement.setString(1,credential);
 
         try {
@@ -23,6 +23,25 @@ public class Customer_dataAccess {
         finally {
             connection.close();
         }
+    }
+    public static boolean isPasswordValid(String username, String password) throws ClassNotFoundException, SQLException {
+
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection connection = DriverManager.getConnection(URL, getDbUserName(),getDbPassword());
+        System.out.println("DB Connected");
+
+        PreparedStatement statement = connection.prepareStatement(PASSWORD_VALIDATION);
+        statement.setString(1,username);
+
+        try {
+            ResultSet resultSet = statement.executeQuery();
+            if(resultSet.next())
+                return password.equals(resultSet.getString(1));
+        }
+        finally {
+            connection.close();
+        }
+        return false;
     }
     public static void registerNewCustomer(Customer customer) throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.cj.jdbc.Driver");
