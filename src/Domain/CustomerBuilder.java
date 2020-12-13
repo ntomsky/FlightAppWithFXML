@@ -16,6 +16,7 @@ public class CustomerBuilder {
     private String email;
     private String secQuestion;
     private String secretAnswer;
+    private int customer_id;
 
     public CustomerBuilder setUsername(String username) {
         this.username = username;

@@ -4,6 +4,7 @@ import Domain.*;
 
 import static DAO.DBQueries.*;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 public class Customer_dataAccess {
@@ -72,5 +73,36 @@ public class Customer_dataAccess {
 
         connection.close();
 
+    }
+    public static ArrayList<Customer> getListOfCustomers() throws ClassNotFoundException, SQLException {
+       ArrayList<Customer> listOfCustomers = new ArrayList<>();
+
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection connection = DriverManager.getConnection(URL, getDbUserName(), getDbPassword());
+        System.out.println("DB Connected");
+
+        //created a new entry in the Users DB
+        PreparedStatement statement = connection.prepareStatement(LIST_OF_CUSTOMERS);
+
+        //execute Query
+        ResultSet rs = statement.executeQuery();
+
+        //create list of customers
+        while(rs.next()) {
+            //fetching data from DB, creating anonymous Flight obj using FlightBuilder
+            //then adding flights to ArrayList <Flights>
+            listOfCustomers.add(new Customer(
+                    rs.getInt(1),
+                    rs.getString(2),
+                    rs.getString(3),
+                    rs.getString(4),
+                    rs.getString(5)
+            ));
+
+        }
+
+        connection.close();
+
+        return listOfCustomers;
     }
 }

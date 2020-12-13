@@ -2,25 +2,22 @@ package Domain;
 
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
 
 public class Flight {
     private SimpleIntegerProperty flightID;
+    private SimpleIntegerProperty flightCapacity;
     private SimpleStringProperty airlineName;
     private SimpleStringProperty departureCity;
     private SimpleStringProperty arrivalCity;
     private LocalDate departureDate;
     private LocalTime departureTime;
     private LocalTime arrivalTime;
-    private SimpleDoubleProperty ticketPrice;
-    public Flight(){}
 
-    public Flight(int flightID, String airlineName, String departureCity, String destinationCity, LocalDate departureDate, LocalTime departureTime, LocalTime arrivalTime, double ticketPrice) {
+    public Flight(int flightID, int flightCapacity, String airlineName, String departureCity, String destinationCity, LocalDate departureDate, LocalTime departureTime, LocalTime arrivalTime, double ticketPrice) {
         this.flightID = new SimpleIntegerProperty(flightID);
         this.airlineName = new SimpleStringProperty(airlineName);
         this.departureCity = new SimpleStringProperty(departureCity);
@@ -29,7 +26,32 @@ public class Flight {
         this.departureTime = departureTime;
         this.arrivalTime = arrivalTime;
         this.ticketPrice = new SimpleDoubleProperty(ticketPrice);
+        this.flightCapacity = new SimpleIntegerProperty(flightCapacity);
     }
+
+    public String getAirlineName() {
+        return airlineName.get();
+    }
+
+    public SimpleStringProperty airlineNameProperty() {
+        return airlineName;
+    }
+
+    private SimpleDoubleProperty ticketPrice;
+
+    public int getFlightCapacity() {
+        return flightCapacity.get();
+    }
+
+    public SimpleIntegerProperty flightCapacityProperty() {
+        return flightCapacity;
+    }
+
+    public void setFlightCapacity(int flightCapacity) {
+        this.flightCapacity.set(flightCapacity);
+    }
+
+    public Flight(){}
 
     public LocalDate getDepartureDate() {
         return departureDate;
@@ -51,17 +73,6 @@ public class Flight {
         this.flightID.set(flightID);
     }
 
-    public String getAirlineName() {
-        return airlineName.get();
-    }
-
-    public SimpleStringProperty airlineNameProperty() {
-        return airlineName;
-    }
-
-    public void setAirlineName(String airlineName) {
-        this.airlineName.set(airlineName);
-    }
 
     public String getDepartureCity() {
         return departureCity.get();

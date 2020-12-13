@@ -13,6 +13,13 @@ public class Customer extends User{
 
     public Customer() {
     }
+    public Customer(int id, String username, String pwd, String firstName, String lastName){
+        setCustomer_id(id);
+        setUserName(username);
+        setUserPassword(pwd);
+        setFirstName(firstName);
+        setLastName(lastName);
+    }
     public Customer(String secretAnswer) throws SQLException, ClassNotFoundException {
 
     }
