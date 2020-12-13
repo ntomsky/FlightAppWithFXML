@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class Controller implements Initializable {
+public class Controller {
 
     //Button to MyFlight Scene
     @FXML
@@ -75,9 +75,15 @@ public class Controller implements Initializable {
     }
 
     //Registration Scene Method
-    public void registrationScene() throws IOException {
-        Stage stage = (Stage) goToRegistrationBtn.getScene().getWindow();
+    public void registrationScene(javafx.event.ActionEvent event) throws IOException {
+        Stage stage;
+
+        if(event.getSource() == goToRegistrationBtn)
+        {
+        stage = (Stage) goToRegistrationBtn.getScene().getWindow();
         stage.close();
+        }
+
         Stage primaryStage = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("Registration_Scene.fxml"));
         primaryStage.setTitle("Registration");
@@ -158,9 +164,9 @@ public class Controller implements Initializable {
         stage.close();
         AdminSceneController.initialize();
     }
-
-    @Override
-    public void initialize(java.net.URL location, ResourceBundle resources) {
-    }
+//
+//    @Override
+//    public void initialize(java.net.URL location, ResourceBundle resources) {
+//    }
 
 }

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 public class Customer_dataAccess {
+    //Validating username
     public static boolean isUsernameValid(String credential) throws ClassNotFoundException, SQLException {
 
         Class.forName("com.mysql.cj.jdbc.Driver");
@@ -25,6 +26,8 @@ public class Customer_dataAccess {
             connection.close();
         }
     }
+
+    //validating password
     public static boolean isPasswordValid(String username, String password) throws ClassNotFoundException, SQLException {
 
         Class.forName("com.mysql.cj.jdbc.Driver");
@@ -44,6 +47,8 @@ public class Customer_dataAccess {
         }
         return false;
     }
+
+    //adding new customer to DB
     public static void registerNewCustomer(Customer customer) throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.cj.jdbc.Driver");
         Connection connection = DriverManager.getConnection(URL, getDbUserName(), getDbPassword());
@@ -74,6 +79,8 @@ public class Customer_dataAccess {
         connection.close();
 
     }
+
+    //getting a list of customers for tableview population
     public static ArrayList<Customer> getListOfCustomers() throws ClassNotFoundException, SQLException {
        ArrayList<Customer> listOfCustomers = new ArrayList<>();
 
@@ -104,5 +111,18 @@ public class Customer_dataAccess {
         connection.close();
 
         return listOfCustomers;
+    }
+
+    //Remove custome from the DB
+    public static void deleteCustomer(int customer_id) throws ClassNotFoundException, SQLException {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection connection = DriverManager.getConnection(URL, getDbUserName(), getDbPassword());
+        System.out.println("DB Connected");
+
+        PreparedStatement statement = connection.prepareStatement(DELETE_CUSTOMER);
+        statement.setInt(1,customer_id);
+
+        statement.executeUpdate();
+        connection.close();
     }
 }

@@ -1,7 +1,6 @@
 package Helpers;
 
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,8 +15,8 @@ public static int SSNtoDigits(String SSN){
     return Integer.parseInt(SSN.substring(0,3) + ""+SSN.substring(4,7) + "" + SSN.substring(8));
 }
 
-public static boolean isFlightNumValid(String flightNum){
-    Pattern pattern = Pattern.compile("\\d{4}");
+public static boolean flightNumValid(String flightNum){
+    Pattern pattern = Pattern.compile("\\d+");
     Matcher matcher = pattern.matcher(flightNum);
 
     return matcher.find();
@@ -28,17 +27,5 @@ public static boolean isFlightNumValid(String flightNum){
 
         return matcher.find();
     }
-
-//
-//public static LocalTime  validateTimeEntry(String flightTime){
-//    // create a formater
-//    DateTimeFormatter formatter
-//            = DateTimeFormatter.ofPattern("HH:mm");
-//    //create local time object
-//    LocalTime time = LocalTime.parse(flightTime, formatter);
-//
-//
-//    return time;
-//}
 
 }

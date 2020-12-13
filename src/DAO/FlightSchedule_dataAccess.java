@@ -111,6 +111,31 @@ public class FlightSchedule_dataAccess {
 
             connection.close();
         }
-//        public static void flightID
+        public static boolean flightNumExists(String flightID) throws ClassNotFoundException, SQLException {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection(URL, getDbUserName(), getDbPassword());
+            System.out.println("DB Connected");
+
+            PreparedStatement statement = connection.prepareStatement(FLIGHT_ID_CHECKER);
+            statement.setInt(1,Integer.valueOf(flightID));
+
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next())
+                return true;
+            return false;
+        }
+public static void deleteFlight(int flightID) throws ClassNotFoundException, SQLException {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection connection = DriverManager.getConnection(URL, getDbUserName(), getDbPassword());
+        System.out.println("DB Connected");
+
+        PreparedStatement statement = connection.prepareStatement(DELETE_FLIGHT);
+        statement.setInt(1,flightID);
+
+        statement.executeUpdate();
+
+        connection.close();
     }
+}
 
