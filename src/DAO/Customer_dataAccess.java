@@ -5,7 +5,6 @@ import Domain.*;
 import static DAO.DBQueries.*;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.regex.Pattern;
 
 public class Customer_dataAccess {
     //Validating username
@@ -18,13 +17,16 @@ public class Customer_dataAccess {
         PreparedStatement statement = connection.prepareStatement(USERNAME_VALIDATION);
         statement.setString(1,credential);
 
-        try {
             ResultSet resultSet = statement.executeQuery();
-            return resultSet.next();
-        }
-        finally {
+           try {
+               if (resultSet.next())
+                   return true;
+               else
+                   return false;
+           }
+           finally {
             connection.close();
-        }
+           }
     }
 
     //validating password
@@ -98,13 +100,7 @@ public class Customer_dataAccess {
         while(rs.next()) {
             //fetching data from DB, creating anonymous Flight obj using FlightBuilder
             //then adding flights to ArrayList <Flights>
-            listOfCustomers.add(new Customer(
-                    rs.getInt(1),
-                    rs.getString(2),
-                    rs.getString(3),
-                    rs.getString(4),
-                    rs.getString(5)
-            ));
+            listOfCustomers.add(new CustomerBuilder().setId(rs.getInt(1)).setUsername(rs.getString(2)).setPwd(rs.getString(3)).setFirstName(rs.getString(4)).setLastName(rs.getString(5)).createCustomer());
 
         }
 

@@ -9,10 +9,15 @@ public class Customer extends User{
     private int customer_id;
     private String securityQuestion, securityAnswer;
 
-
+    public Customer(int customer_id, String securityQuestion, String securityAnswer) {
+        this.customer_id = customer_id;
+        this.securityQuestion = securityQuestion;
+        this.securityAnswer = securityAnswer;
+    }
 
     public Customer() {
     }
+
     public Customer(int id, String username, String pwd, String firstName, String lastName){
         setCustomer_id(id);
         setUserName(username);
@@ -20,7 +25,22 @@ public class Customer extends User{
         setFirstName(firstName);
         setLastName(lastName);
     }
-    public Customer(String secretAnswer) throws SQLException, ClassNotFoundException {
+    public Customer(String SSN, String username, String password, String first_name, String last_name, String streetAddress,
+                    String cityAddress, String stateAddress, String zipAddress, String phoneNum, String email,
+                    String securityQuestion, String securityAnswer){
+        this.customer_id = EntryVerifiers.SSNtoDigits(SSN);
+        setUserName(username);
+        setUserPassword(password);
+        setFirstName(first_name);
+        setLastName(last_name);
+        setStreetAddress(streetAddress);
+        setCityAddress(cityAddress);
+        setStreetAddress(stateAddress);
+        setZipAddress(zipAddress);
+        setUserPhoneNumber(phoneNum);
+        setUserEmail(email);
+        setSecurityQuestion(securityQuestion);
+        setSecurityAnswer(securityAnswer);
 
     }
 

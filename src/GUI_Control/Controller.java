@@ -5,10 +5,10 @@ import static DAO.Customer_dataAccess.*;
 
 import Domain.*;
 import GUI_Control.Admin.AdminSceneController;
+import GUI_Control.Admin.PopUpBoxes.PopUpAlertBox;
 import Helpers.EntryVerifiers;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -16,7 +16,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ResourceBundle;
 
 public class Controller {
 
@@ -107,21 +106,47 @@ public class Controller {
     public void processRegistration() throws SQLException, ClassNotFoundException, IOException {
 
         //check if username is available
-        if (!isUsernameValid(newCustUsername.getText())) {
-            System.out.println("Username taken AlertBox");
+        if (isUsernameValid(newCustUsername.getText())) {
+            PopUpAlertBox.display("Username Already Exists","Please select a different Username");
+            return;
         }
         //check SSN format
-        else if(!EntryVerifiers.isSSN_Valid(newCustSSN.getText()))
+         if(!EntryVerifiers.isSSN_Valid(newCustSSN.getText()))
+         {
              //later alert box , sout to terminal for now
-             System.out.println("your SSN format should match xxx-xxx-xxxx, where x is a digit");
+            PopUpAlertBox.display("Incorrect SSN entry","your SSN format should match xxx-xxx-xxxx, where x is a digit");
+            return;
+         }
 
-
-        //create new Customer entity
-        Customer customer = new CustomerBuilder().setUsername(newCustUsername.getText()).setPassword(newCustPassword.getText()).setFirstName(newCustFirstName.getText()).setLastName(newCustLastName.getText()).setSSN(newCustSSN.getText()).setStreetAddress(newCustStreetAddress.getText()).setCityAddress(newCustCityAddress.getText()).setStateAddress(newCustState.getText()).setZipAddress(newCustZip.getText()).setPhoneNumber(newCustPhoneNumber.getText()).setEmail(newCustEmail.getText()).setSecQuestion(newCustSecQuestion.getValue()).setSecretAnswer(newCustSecretAnswer.getText()).createCustomer();
+//            //create new Customer entity
+//            Customer customer = new CustomerBuilder().createCustomer()
+//                    .setUsername(newCustUsername.getText())
+//                    .setPassword(newCustPassword.getText())
+//                    .setFirstName(newCustFirstName.getText())
+//                    .setLastName(newCustLastName.getText())
+//                    .setSSN(newCustSSN.getText())
+//                    .setStreetAddress(newCustStreetAddress.getText())
+//                    .setCityAddress(newCustCityAddress.getText())
+//                    .setStateAddress(newCustState.getText())
+//                    .setZipAddress(newCustZip.getText())
+//                    .setPhoneNumber(newCustPhoneNumber.getText())
+//                    .setEmail(newCustEmail.getText())
+//                    .setSecQuestion(newCustSecQuestion.getValue())
+//                    .setSecretAnswer(newCustSecretAnswer.getText())
+//                    .createCustomer();
+//        System.out.println(customer);
 
         //insert new customer in DB
-        Customer_dataAccess.registerNewCustomer(customer);
+        try{
+//            Customer_dataAccess.registerNewCustomer(customer);
+        }
+        catch (Exception ex){
+            ex.getMessage();
+            ex.printStackTrace();
+            return;
+        }
 
+        PopUpAlertBox.display("Confirmation", "Thank you for registering with us!");
         //if success proceed to main menu scene
         transitionToMainMenu(completeRegistration);
     }

@@ -1,30 +1,52 @@
 package Domain;
 
-import java.sql.SQLException;
-
 public class CustomerBuilder {
+    private int customer_id;
+    private String securityQuestion;
+    private String securityAnswer;
+    private int id;
     private String username;
-    private String password;
+    private String pwd;
     private String firstName;
     private String lastName;
     private String ssn;
+    private String password;
+    private String first_name;
+    private String last_name;
     private String streetAddress;
     private String cityAddress;
     private String stateAddress;
     private String zipAddress;
-    private String phoneNumber;
+    private String phoneNum;
     private String email;
-    private String secQuestion;
-    private String secretAnswer;
-    private int customer_id;
+
+    public CustomerBuilder setCustomer_id(int customer_id) {
+        this.customer_id = customer_id;
+        return this;
+    }
+
+    public CustomerBuilder setSecurityQuestion(String securityQuestion) {
+        this.securityQuestion = securityQuestion;
+        return this;
+    }
+
+    public CustomerBuilder setSecurityAnswer(String securityAnswer) {
+        this.securityAnswer = securityAnswer;
+        return this;
+    }
+
+    public CustomerBuilder setId(int id) {
+        this.id = id;
+        return this;
+    }
 
     public CustomerBuilder setUsername(String username) {
         this.username = username;
         return this;
     }
 
-    public CustomerBuilder setPassword(String password) {
-        this.password = password;
+    public CustomerBuilder setPwd(String pwd) {
+        this.pwd = pwd;
         return this;
     }
 
@@ -40,6 +62,21 @@ public class CustomerBuilder {
 
     public CustomerBuilder setSSN(String ssn) {
         this.ssn = ssn;
+        return this;
+    }
+
+    public CustomerBuilder setPassword(String password) {
+        this.password = password;
+        return this;
+    }
+
+    public CustomerBuilder setFirst_name(String first_name) {
+        this.first_name = first_name;
+        return this;
+    }
+
+    public CustomerBuilder setLast_name(String last_name) {
+        this.last_name = last_name;
         return this;
     }
 
@@ -63,8 +100,8 @@ public class CustomerBuilder {
         return this;
     }
 
-    public CustomerBuilder setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public CustomerBuilder setPhoneNum(String phoneNum) {
+        this.phoneNum = phoneNum;
         return this;
     }
 
@@ -73,17 +110,7 @@ public class CustomerBuilder {
         return this;
     }
 
-    public CustomerBuilder setSecQuestion(String secQuestion) {
-        this.secQuestion = secQuestion;
-        return this;
-    }
-
-    public CustomerBuilder setSecretAnswer(String secretAnswer) {
-        this.secretAnswer = secretAnswer;
-        return this;
-    }
-
-    public Customer createCustomer() throws SQLException, ClassNotFoundException {
-        return new Customer(secretAnswer);
+    public Customer createCustomer() {
+        return new Customer(customer_id, securityQuestion, securityAnswer);
     }
 }
