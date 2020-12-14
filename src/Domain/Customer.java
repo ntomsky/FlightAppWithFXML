@@ -18,24 +18,25 @@ public class Customer extends User{
     public Customer() {
     }
 
-    public Customer(int id, String username, String pwd, String firstName, String lastName){
-        setCustomer_id(id);
+    //constructor for userMgt tableview
+    public Customer(int customer_id, String username, String pwd, String firstName, String lastName){
+        setCustomer_id(customer_id);
         setUserName(username);
         setUserPassword(pwd);
         setFirstName(firstName);
         setLastName(lastName);
     }
-    public Customer(String SSN, String username, String password, String first_name, String last_name, String streetAddress,
+    public Customer(int SSN, String username, String password, String first_name, String last_name, String streetAddress,
                     String cityAddress, String stateAddress, String zipAddress, String phoneNum, String email,
                     String securityQuestion, String securityAnswer){
-        this.customer_id = EntryVerifiers.SSNtoDigits(SSN);
+        setCustomer_id(SSN);
         setUserName(username);
         setUserPassword(password);
         setFirstName(first_name);
         setLastName(last_name);
         setStreetAddress(streetAddress);
         setCityAddress(cityAddress);
-        setStreetAddress(stateAddress);
+        setStateAddress(stateAddress);
         setZipAddress(zipAddress);
         setUserPhoneNumber(phoneNum);
         setUserEmail(email);
@@ -44,8 +45,9 @@ public class Customer extends User{
 
     }
 
-    public String getSecurityQuestion() {
-        return securityQuestion;
+    public Customer(String username, String password) {
+        setUserName(username);
+        setUserPassword(password);
     }
 
     public int getCustomer_id() {
@@ -55,9 +57,15 @@ public class Customer extends User{
     public void setCustomer_id(int customer_id) {
         this.customer_id = customer_id;
     }
+
+    public String getSecurityQuestion() {
+        return securityQuestion;
+    }
+
     public void setSecurityQuestion(String securityQuestion) {
         this.securityQuestion = securityQuestion;
     }
+
     public String getSecurityAnswer() {
         return securityAnswer;
     }
@@ -65,5 +73,4 @@ public class Customer extends User{
     public void setSecurityAnswer(String securityAnswer) {
         this.securityAnswer = securityAnswer;
     }
-
 }

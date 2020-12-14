@@ -102,7 +102,7 @@ public class FlightSchedule_dataAccess {
             statement.setDate(5,Date.valueOf(flight.getDepartureDate()));
             statement.setString(6,flight.getArrivalCity());
             statement.setTime(7,Time.valueOf(flight.getArrivalTime()));
-            statement.setDouble(8,flight.getTicketPrice());
+            statement.setDouble(8,Double.valueOf(flight.getTicketPrice().substring(1)));
             statement.setInt(9,flight.getFlightCapacity());
 
             statement.executeUpdate();
@@ -125,17 +125,17 @@ public class FlightSchedule_dataAccess {
                 return true;
             return false;
         }
-public static void deleteFlight(int flightID) throws ClassNotFoundException, SQLException {
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection connection = DriverManager.getConnection(URL, getDbUserName(), getDbPassword());
-        System.out.println("DB Connected");
+        public static void deleteFlight(int flightID) throws ClassNotFoundException, SQLException {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                Connection connection = DriverManager.getConnection(URL, getDbUserName(), getDbPassword());
+                System.out.println("DB Connected");
 
-        PreparedStatement statement = connection.prepareStatement(DELETE_FLIGHT);
-        statement.setInt(1,flightID);
+                PreparedStatement statement = connection.prepareStatement(DELETE_FLIGHT);
+                statement.setInt(1,flightID);
 
-        statement.executeUpdate();
+                statement.executeUpdate();
 
-        connection.close();
-    }
+                connection.close();
+        }
 }
 

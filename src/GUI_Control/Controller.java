@@ -66,6 +66,7 @@ public class Controller {
                 transitionToAdminScene();
                 break;
             } else {
+                Customer activeCustomer = new Customer(username,password);
                 System.out.println("valid username and password");
                 transitionToMainMenu(loginBtn);
                 break;
@@ -119,26 +120,24 @@ public class Controller {
          }
 
 //            //create new Customer entity
-//            Customer customer = new CustomerBuilder().createCustomer()
-//                    .setUsername(newCustUsername.getText())
-//                    .setPassword(newCustPassword.getText())
-//                    .setFirstName(newCustFirstName.getText())
-//                    .setLastName(newCustLastName.getText())
-//                    .setSSN(newCustSSN.getText())
-//                    .setStreetAddress(newCustStreetAddress.getText())
-//                    .setCityAddress(newCustCityAddress.getText())
-//                    .setStateAddress(newCustState.getText())
-//                    .setZipAddress(newCustZip.getText())
-//                    .setPhoneNumber(newCustPhoneNumber.getText())
-//                    .setEmail(newCustEmail.getText())
-//                    .setSecQuestion(newCustSecQuestion.getValue())
-//                    .setSecretAnswer(newCustSecretAnswer.getText())
-//                    .createCustomer();
-//        System.out.println(customer);
+            Customer customer = new Customer((
+                    EntryVerifiers.SSNtoDigits(newCustSSN.getText())),
+                    newCustUsername.getText(),
+                    newCustPassword.getText(),
+                    newCustFirstName.getText(),
+                    newCustLastName.getText(),
+                    newCustStreetAddress.getText(),
+                    newCustCityAddress.getText(),
+                    newCustState.getText(),
+                    newCustZip.getText(),
+                    newCustPhoneNumber.getText(),
+                    newCustEmail.getText(),
+                    newCustSecQuestion.getValue(),
+                    newCustSecretAnswer.getText());
 
         //insert new customer in DB
         try{
-//            Customer_dataAccess.registerNewCustomer(customer);
+            Customer_dataAccess.registerNewCustomer(customer);
         }
         catch (Exception ex){
             ex.getMessage();

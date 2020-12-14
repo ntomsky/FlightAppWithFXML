@@ -19,7 +19,7 @@
                   <Font name="Adobe Gurmukhi" size="18.0" />
                </font>
             </Button>
-            <Button layoutX="10.0" layoutY="76.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="233.0" text="Log Out">
+            <Button fx:id="backToLogInBtn" layoutX="10.0" layoutY="76.0" mnemonicParsing="false" onAction="#backToLogIn" prefHeight="66.0" prefWidth="233.0" text="Log Out">
                <font>
                   <Font name="Adobe Gurmukhi" size="18.0" />
                </font>
@@ -31,10 +31,5 @@
             </Button>
          </children>
         </VBox>
-        <Button fx:id="backToLogInBtn" layoutX="27.0" layoutY="340.0" mnemonicParsing="false" onAction="#backToLogIn" prefHeight="27.0" prefWidth="146.0" text="Back">
-            <font>
-                <Font name="Adobe Gurmukhi" size="18.0" />
-            </font>
-        </Button>
     </children>
 </AnchorPane>

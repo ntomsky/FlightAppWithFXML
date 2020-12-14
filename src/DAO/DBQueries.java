@@ -32,7 +32,7 @@ public class DBQueries {
 
     //removal of customers or flights
     public static final String DELETE_FLIGHT = "DELETE FROM Flight_Schedule WHERE flight_id = ?;";
-    public static final String DELETE_CUSTOMER = "DELETE FROM Users WHERE customer_id = ?;";
+    public static final String DELETE_CUSTOMER = "DELETE FROM Users WHERE SSN = ?;";
 
 
     public static String getDbUserName() {

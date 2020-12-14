@@ -4,8 +4,12 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
+
+import static java.time.temporal.ChronoUnit.HOURS;
+import static java.time.temporal.ChronoUnit.MINUTES;
 
 public class Flight {
     private SimpleIntegerProperty flightID;
@@ -16,6 +20,9 @@ public class Flight {
     private LocalDate departureDate;
     private LocalTime departureTime;
     private LocalTime arrivalTime;
+    private String flightTime;
+    private SimpleStringProperty ticketPrice;
+    private SimpleStringProperty takeOffLandTime;
 
     public Flight(int flightID, int flightCapacity, String airlineName, String departureCity, String destinationCity, LocalDate departureDate, LocalTime departureTime, LocalTime arrivalTime, double ticketPrice) {
         this.flightID = new SimpleIntegerProperty(flightID);
@@ -25,8 +32,10 @@ public class Flight {
         this.departureDate = departureDate;
         this.departureTime = departureTime;
         this.arrivalTime = arrivalTime;
-        this.ticketPrice = new SimpleDoubleProperty(ticketPrice);
+        this.ticketPrice = new SimpleStringProperty("$" + ticketPrice);
         this.flightCapacity = new SimpleIntegerProperty(flightCapacity);
+        setFlightTime();
+        setTakeOffLandTime();
     }
 
     public String getAirlineName() {
@@ -36,8 +45,6 @@ public class Flight {
     public SimpleStringProperty airlineNameProperty() {
         return airlineName;
     }
-
-    private SimpleDoubleProperty ticketPrice;
 
     public int getFlightCapacity() {
         return flightCapacity.get();
@@ -103,15 +110,15 @@ public class Flight {
         this.arrivalTime = arrivalTime;
     }
 
-    public double getTicketPrice() {
+    public String getTicketPrice() {
         return ticketPrice.get();
     }
 
-    public SimpleDoubleProperty ticketPriceProperty() {
+    public SimpleStringProperty ticketPriceProperty() {
         return ticketPrice;
     }
 
-    public void setTicketPrice(double ticketPrice) {
+    public void setTicketPrice(String ticketPrice) {
         this.ticketPrice.set(ticketPrice);
     }
 
@@ -125,5 +132,28 @@ public class Flight {
 
     public void setArrivalCity(String arrivalCity) {
         this.arrivalCity.set(arrivalCity);
+    }
+
+    public String getFlightTime() {
+        return flightTime;
+    }
+
+    public void setFlightTime() {
+        long timeOfFlight = departureTime.until(arrivalTime,MINUTES);
+        long hours = timeOfFlight / 60;
+        long min = timeOfFlight % 60;
+        flightTime = hours + "h " + min + "m";
+    }
+
+    public String getTakeOffLandTime() {
+        return takeOffLandTime.get();
+    }
+
+    public SimpleStringProperty takeOffLandTimeProperty() {
+        return takeOffLandTime;
+    }
+
+    public void setTakeOffLandTime() {
+        this.takeOffLandTime = new SimpleStringProperty(departureTime + " - " + arrivalTime);
     }
 }

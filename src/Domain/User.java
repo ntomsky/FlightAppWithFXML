@@ -8,10 +8,6 @@ public abstract class User {
     private String userName, userPassword, firstName, lastName, streetAddress, cityAddress,
             stateAddress, userEmail, zipAddress, userPhoneNumber;
 
-    public User(){
-
-    }
-
     public String getUserName() {
         return userName;
     }
@@ -68,6 +64,14 @@ public abstract class User {
         this.stateAddress = stateAddress;
     }
 
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
     public String getZipAddress() {
         return zipAddress;
     }
@@ -84,12 +88,6 @@ public abstract class User {
         this.userPhoneNumber = userPhoneNumber;
     }
 
-    public String getUserEmail() {
-        return userEmail;
+    public User(){
     }
-
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
-    }
-
 }

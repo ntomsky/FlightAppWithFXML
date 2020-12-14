@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<SplitPane dividerPositions="0.21105527638190955" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI_Control.BookNewFlightController">
+<SplitPane dividerPositions="0.21105527638190955" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI_Control.BookNewFlightController">
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="316.0" prefWidth="598.0">
          <children>
-            <VBox prefHeight="73.0" prefWidth="644.0">
+            <VBox layoutX="118.0" prefHeight="73.0" prefWidth="526.0">
                <children>
                   <HBox prefHeight="30.0" prefWidth="644.0">
                      <children>
@@ -25,34 +34,49 @@
                   </HBox>
                   <HBox prefHeight="41.0" prefWidth="644.0">
                      <children>
-                        <ChoiceBox prefWidth="150.0" />
-                        <TextField fx:id="filteredField" prefHeight="27.0" prefWidth="200.0" promptText="Where to?" />
-                        <DatePicker minHeight="-Infinity" minWidth="-Infinity" prefHeight="27.0" prefWidth="200.0">
+                        <ChoiceBox prefHeight="27.0" prefWidth="166.0" />
+                        <TextField fx:id="filteredField" prefHeight="27.0" prefWidth="200.0" promptText="Where to?">
                            <HBox.margin>
-                              <Insets />
+                              <Insets left="5.0" />
+                           </HBox.margin></TextField>
+                        <DatePicker minHeight="-Infinity" minWidth="-Infinity" prefHeight="27.0" prefWidth="136.0">
+                           <HBox.margin>
+                              <Insets left="5.0" />
                            </HBox.margin>
                         </DatePicker>
                         <Button fx:id="searchFlightButton" mnemonicParsing="false" text="Search" />
                      </children>
+                     <VBox.margin>
+                        <Insets left="50.0" />
+                     </VBox.margin>
                   </HBox>
                </children>
             </VBox>
          </children></AnchorPane>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="598.0">
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="800.0">
          <children>
-            <TableView fx:id="flightScheduleTableView" layoutX="33.0" layoutY="7.0" prefHeight="284.0" prefWidth="729.0">
+            <TableView fx:id="flightScheduleTableView" layoutX="11.0" layoutY="7.0" prefHeight="284.0" prefWidth="773.0">
               <columns>
                   <TableColumn fx:id="fligthtNumCol" prefWidth="63.0" text="FLIGHT ID" />
-                  <TableColumn fx:id="airlineCol" prefWidth="102.0" text="AIRLINE" />
-                  <TableColumn fx:id="departCityCol" prefWidth="142.0" text="FROM" />
-                  <TableColumn fx:id="arrivalCityCol" prefWidth="123.0" text="TO" />
-                  <TableColumn fx:id="departureDateCol" prefWidth="75.0" text="DATE" />
-                  <TableColumn fx:id="departureTimeCol" prefWidth="82.0" text="DEPARTURE" />
-                  <TableColumn fx:id="arrivalTimeCol" prefWidth="68.0" text="ARRIVAL" />
-                  <TableColumn fx:id="ticketPriceCol" prefWidth="70.0" text="PRICE" />
+                  <TableColumn fx:id="airlineCol" prefWidth="105.0" text="AIRLINE" />
+                  <TableColumn fx:id="departCityCol" prefWidth="114.0" text="FROM" />
+                  <TableColumn fx:id="arrivalCityCol" prefWidth="107.0" text="TO" />
+                  <TableColumn fx:id="departureDateCol" prefWidth="81.0" text="DATE" />
+                  <TableColumn fx:id="takeOffLandCol" prefWidth="99.0" text="WHEN" />
+                  <TableColumn fx:id="flightTimeCol" prefWidth="57.0" text="TIME" />
+                  <TableColumn fx:id="ticketPriceCol" prefWidth="59.0" text="PRICE" />
+                  <TableColumn fx:id="flightCapCol" prefWidth="85.0" text="SEATS LEFT" />
               </columns>
+               <padding>
+                  <Insets left="5.0" />
+               </padding>
             </TableView>
             <Button fx:id="backToMainButton" layoutX="25.0" layoutY="374.0" mnemonicParsing="false" onAction="#setBackToMainButton" text="Back">
+               <font>
+                  <Font name="Adobe Gurmukhi" size="18.0" />
+               </font>
+            </Button>
+            <Button layoutX="369.0" layoutY="341.0" mnemonicParsing="false" text="Book">
                <font>
                   <Font name="Adobe Gurmukhi" size="18.0" />
                </font>

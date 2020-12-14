@@ -64,9 +64,11 @@ public class Customer_dataAccess {
         statement.setString(3, customer.getUserPassword());
         statement.setString(4, customer.getFirstName());
         statement.setString(5, customer.getLastName());
-        statement.setString(6, customer.getStateAddress());
+        statement.setString(6, customer.getStreetAddress());
+        System.out.println(customer.getStreetAddress());
         statement.setString(7, customer.getCityAddress());
         statement.setString(8, customer.getStateAddress());
+        System.out.println(customer.getStateAddress());
         statement.setString(9, customer.getZipAddress());
         statement.setString(10, customer.getUserPhoneNumber());
         statement.setString(11, customer.getUserEmail());
@@ -100,8 +102,7 @@ public class Customer_dataAccess {
         while(rs.next()) {
             //fetching data from DB, creating anonymous Flight obj using FlightBuilder
             //then adding flights to ArrayList <Flights>
-            listOfCustomers.add(new CustomerBuilder().setId(rs.getInt(1)).setUsername(rs.getString(2)).setPwd(rs.getString(3)).setFirstName(rs.getString(4)).setLastName(rs.getString(5)).createCustomer());
-
+            listOfCustomers.add(new Customer(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5)));
         }
 
         connection.close();
@@ -121,4 +122,7 @@ public class Customer_dataAccess {
         statement.executeUpdate();
         connection.close();
     }
+
+
+    //new method for password reset
 }
