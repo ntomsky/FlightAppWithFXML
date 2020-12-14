@@ -45,9 +45,8 @@ public class Customer extends User{
 
     }
 
-    public Customer(String username, String password) {
+    public Customer(String username) {
         setUserName(username);
-        setUserPassword(password);
     }
 
     public int getCustomer_id() {
@@ -73,4 +72,6 @@ public class Customer extends User{
     public void setSecurityAnswer(String securityAnswer) {
         this.securityAnswer = securityAnswer;
     }
+
+
 }
