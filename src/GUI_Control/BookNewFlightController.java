@@ -91,17 +91,24 @@ public class BookNewFlightController implements Initializable {
 
     public void bookNewFlight(javafx.event.ActionEvent event){
 
+        //assigning selected row to a new object
         if(event.getSource() == bookFlightBtn) {
             selectedFlight = flightScheduleTableView.getSelectionModel().getSelectedItem();
         }
 
-//        try{
-//            BookedFlights_dataAccess.bookFlight(CurrentUser.getCurrentUser(),selectedFlight.getFlightID());
-//            PopUpAlertBox.display("Confirmation", "Flights has been deleted");
-//        }
-//        catch (Exception ex){
-//            ex.getMessage();
-//        }
+        try{
+            //sending request to DB for processing
+            int cap = BookedFlights_dataAccess.bookFlight(CurrentUser.getCurrentUser(),selectedFlight.getFlightID());
+            if(cap == -1){
+                PopUpAlertBox.display("Full Capacity", "We are sorry, this flight is already full");
+            }
+            else
+            PopUpAlertBox.display("Confirmation", "Congratulations! Your Flight has been booked!");
+        }
+        catch (Exception ex){
+            ex.getMessage();
+            PopUpAlertBox.display("Oops!", "Something went wrong. Please try again later");
+        }
 
     }
 

@@ -7,6 +7,15 @@ import java.sql.SQLException;
 public abstract class User {
     private String userName, userPassword, firstName, lastName, streetAddress, cityAddress,
             stateAddress, userEmail, zipAddress, userPhoneNumber;
+    private int userID;
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
 
     public User(){
     }

@@ -73,7 +73,16 @@ public class Controller {
 
             } else {
                 Customer activeCustomer = new Customer(username);
-                CurrentUser.registerCurrentUser(activeCustomer);
+                try {
+                    //this pulls ID from DB and then initiates a global Current customer obj
+                    CurrentUser.registerCurrentUser(Customer_dataAccess.initializeCustomer(activeCustomer));
+                }
+                catch (Exception ex){
+                    ex.getMessage();
+                    System.out.println("error in initializing active customer");
+                    PopUpAlertBox.display("oops","something went wrong");
+                    return;
+                }
                 System.out.println("valid username and password");
                 transitionToMainMenu(loginBtn);
                 break;

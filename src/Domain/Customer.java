@@ -17,7 +17,6 @@ public class Customer extends User{
 
     public Customer() {
     }
-
     //constructor for userMgt tableview
     public Customer(int customer_id, String username, String pwd, String firstName, String lastName){
         setCustomer_id(customer_id);
@@ -42,11 +41,14 @@ public class Customer extends User{
         setUserEmail(email);
         setSecurityQuestion(securityQuestion);
         setSecurityAnswer(securityAnswer);
-
     }
 
     public Customer(String username) {
         setUserName(username);
+    }
+
+    private void initializeFields(Customer customer){
+
     }
 
     public int getCustomer_id() {

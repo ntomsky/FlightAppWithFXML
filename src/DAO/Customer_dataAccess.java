@@ -109,6 +109,32 @@ public class Customer_dataAccess {
 
         return listOfCustomers;
     }
+ //getting a list of customers for tableview population
+    public static Customer initializeCustomer(Customer activeCustomer) throws ClassNotFoundException, SQLException {
+
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection connection = DriverManager.getConnection(URL, getDbUserName(), getDbPassword());
+        System.out.println("DB Connected");
+
+        //created a new entry in the Users DB
+        PreparedStatement statement = connection.prepareStatement(GET_ID);
+
+        statement.setString(1,activeCustomer.getUserName());
+
+        //execute Query
+        ResultSet rs = statement.executeQuery();
+
+        //create list of customers
+        while(rs.next()) {
+            //fetching data from DB, creating anonymous Flight obj using FlightBuilder
+            //then adding flights to ArrayList <Flights>
+            activeCustomer.setCustomer_id(rs.getInt(1));
+            System.out.println(activeCustomer.getCustomer_id());
+        }
+        connection.close();
+
+        return activeCustomer;
+    }
 
     //Remove custome from the DB
     public static void deleteCustomer(int customer_id) throws ClassNotFoundException, SQLException {
