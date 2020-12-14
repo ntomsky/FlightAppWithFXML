@@ -1,0 +1,47 @@
+.root {
+    -fx-background-image: url("JavaForOSX.jpg");
+}
+
+.label {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+    -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
+}
+.intro {
+    -fx-font-size: 20 px;
+    -fx-font-family: "Calibri Light";
+    -fx-fill: #818181;
+    -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
+}
+
+.text2 {
+    -fx-font-size: 30px;
+    -fx-font-family: "Calibri Light";
+    -fx-fill: #818181;
+    -fx-effect: innershadow(three-pass-box, rgba(0, 0, 0, 0.7), 6, 0.0, 0, 2);
+}
+.button {
+    -fx-text-fill: white;
+    -fx-font-family: "Calibri Light";
+    -fx-font-weight: bold;
+    -fx-background-color: linear-gradient(#99b5d4, #7d86b6);
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+.text-field {
+    -fx-font-size: 12px;
+    -fx-font-family: "Calibri Light";
+    -fx-font-weight: bold;
+}
+.password-field{
+    -fx-font-size: 15px;
+    -fx-font-family: "Calibri Light";
+    -fx-font-weight: bold;
+}
+
+#welcome-text {
+    -fx-font-size: 30px;
+    -fx-font-family: "Calibri Light";
+    -fx-fill: #818181;
+    -fx-effect: innershadow(three-pass-box, rgba(0, 0, 0, 0.7), 6, 0.0, 0, 2);
+}

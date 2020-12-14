@@ -1,7 +1,9 @@
 package GUI_Control;
 
+import DAO.BookedFlights_dataAccess;
 import DAO.FlightSchedule_dataAccess;
 import Domain.*;
+import GUI_Control.Admin.PopUpBoxes.PopUpAlertBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -20,6 +22,8 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
+
+import static DAO.FlightSchedule_dataAccess.deleteFlight;
 
 public class BookNewFlightController implements Initializable {
     //Book New Flight TableView Elements
@@ -43,6 +47,8 @@ public class BookNewFlightController implements Initializable {
     private final ObservableList<Flight> flightScheduleDataList = FXCollections.observableArrayList();
 
     private Flight selectedFlight;
+    //Book Flight Button
+    @FXML private Button bookFlightBtn;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -83,7 +89,19 @@ public class BookNewFlightController implements Initializable {
         MainMenuController.MainMenuInitializer(backToMainButton);
     }
 
-    public void bookNewFlight(Customer activeCustomer, String flightNum){
+    public void bookNewFlight(javafx.event.ActionEvent event){
+
+        if(event.getSource() == bookFlightBtn) {
+            selectedFlight = flightScheduleTableView.getSelectionModel().getSelectedItem();
+        }
+
+//        try{
+//            BookedFlights_dataAccess.bookFlight(CurrentUser.getCurrentUser(),selectedFlight.getFlightID());
+//            PopUpAlertBox.display("Confirmation", "Flights has been deleted");
+//        }
+//        catch (Exception ex){
+//            ex.getMessage();
+//        }
 
     }
 

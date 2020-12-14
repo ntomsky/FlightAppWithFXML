@@ -56,17 +56,24 @@ public class Controller {
         String username = loginUsername.getText();
         String password = loginPwd.getText();
         while(true) {
+            //validation steps
+
+            //method to db that returns null, customer or Admin
+
             if (!isUsernameValid(username)) {
-                System.out.println("invalid username");
+                PopUpAlertBox.display("Invalid username", "Try again or Select Register");
                 return;
             } else if (!isPasswordValid(username, password)) {
-                System.out.println("invalid password");
+                PopUpAlertBox.display("Invalid password", "Try again or Select Reset Password");
                 return;
             } else if (Admin_dataAccess.isAdmin(username)) {
+                //TODO create admin instance here
                 transitionToAdminScene();
                 break;
+
             } else {
-                Customer activeCustomer = new Customer(username,password);
+                Customer activeCustomer = new Customer(username);
+                CurrentUser.registerCurrentUser(activeCustomer);
                 System.out.println("valid username and password");
                 transitionToMainMenu(loginBtn);
                 break;
@@ -146,21 +153,23 @@ public class Controller {
         }
 
         PopUpAlertBox.display("Confirmation", "Thank you for registering with us!");
-        //if success proceed to main menu scene
+        //if success proceed to main menu scen
+
+        //Return to login;
         transitionToMainMenu(completeRegistration);
     }
 
     //to main Menu transition
     public void transitionToMainMenu(Button btn) throws IOException {
         //changing to new Stage
-        MainMenuController.MainMenuInitializer(btn);
-//        Stage stage = (Stage) btn.getScene().getWindow();
-//        stage.close();
-//        Stage primaryStage = new Stage();
-//        Parent root = FXMLLoader.load(getClass().getResource("MainMenuScene.fxml"));
-//        primaryStage.setTitle("Main Menu");
-//        primaryStage.setScene(new Scene(root, 600, 400));
-//        primaryStage.show();
+//        MainMenuController.MainMenuInitializer(btn);
+        Stage stage = (Stage) btn.getScene().getWindow();
+        stage.close();
+        Stage primaryStage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("MainMenuScene.fxml"));
+        primaryStage.setTitle("Main Menu");
+        primaryStage.setScene(new Scene(root, 600, 400));
+        primaryStage.show();
     }
 
     //Call to My Flight Scene
