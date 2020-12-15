@@ -14,6 +14,26 @@ public class BookedFlights_dataAccess {
         Connection connection = DriverManager.getConnection(URL, getDbUserName(), getDbPassword());
         System.out.println("DB Connected");
 
+        //this method checks if user already has a flight reservation for this flight_id.
+        // if so, returns "-2" to GUI and popup message
+        try {
+            PreparedStatement statement = connection.prepareStatement(CHECK_DOUBLE_BOOKING);
+            statement.setInt(1,flightID);
+            ResultSet bookedReservation = statement.executeQuery();
+
+            while(bookedReservation.next()){
+                //checks returned SSN \with activeCustomer's id
+                if(bookedReservation.getString(1).equals(((Customer)user).getCustomer_id()));
+                    return -2;
+
+            }
+        } catch (SQLException throwables) {
+            throwables.getStackTrace();
+            connection.close();
+            throw new SQLException ("error in checking for existing booking");
+
+        }
+
         //this section checks for flight capacity and if it is 0, return -1
         try {
             PreparedStatement statement = connection.prepareStatement(CHECK_CAPACITY);

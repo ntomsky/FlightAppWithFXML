@@ -42,6 +42,7 @@ public class DBQueries {
     public static final String RESET_PASSWORD = " UPDATE users SET password = ? WHERE username = ?;";
 
  //flight booking queries
+    public static final String CHECK_DOUBLE_BOOKING = " SELECT SSN FROM Booked_Flights WHERE Flight_ID = ? ;";
     public static final String CHECK_CAPACITY = " SELECT Flight_Cap FROM Flight_Schedule WHERE Flight_ID = ? ;";
     public static final String BOOK_FLIGHT = " INSERT INTO Booked_Flights (SSN, Flight_ID) Values (? , ?)";
     public static final String DEBIT_SEAT = "UPDATE FLight_Schedule SET Flight_Cap = Flight_Cap - 1 WHERE Flight_ID = ?;";

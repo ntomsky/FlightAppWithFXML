@@ -17,7 +17,8 @@ public class PopUpAlertBox {
 
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle(title);
-        window.setMinWidth(250);
+        window.setMinWidth(300);
+        window.setMinHeight(100);
 
         Label label = new Label();
         label.setText(message);

@@ -98,9 +98,14 @@ public class BookNewFlightController implements Initializable {
 
         try{
             //sending request to DB for processing
-            int cap = BookedFlights_dataAccess.bookFlight(CurrentUser.getCurrentUser(),selectedFlight.getFlightID());
-            if(cap == -1){
+            int result = BookedFlights_dataAccess.bookFlight(CurrentUser.getCurrentUser(),selectedFlight.getFlightID());
+            if(result == -1){
                 PopUpAlertBox.display("Full Capacity", "We are sorry, this flight is already full");
+                return;
+            }
+            else if (result == -2){
+                PopUpAlertBox.display("Double Booking", "It looks like you already have a seat on this flight!");
+                return;
             }
             else
             PopUpAlertBox.display("Confirmation", "Congratulations! Your Flight has been booked!");
