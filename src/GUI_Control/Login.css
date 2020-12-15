@@ -45,3 +45,10 @@
     -fx-fill: #818181;
     -fx-effect: innershadow(three-pass-box, rgba(0, 0, 0, 0.7), 6, 0.0, 0, 2);
 }
+
+#find-plane {
+    -fx-font-size: 30px;
+    -fx-font-family: "Calibri Light";
+    -fx-fill: #818181;
+    -fx-effect: innershadow(three-pass-box, rgba(0, 0, 0, 0.7), 6, 0.0, 0, 2);
+}
