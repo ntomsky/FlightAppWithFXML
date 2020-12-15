@@ -2,6 +2,7 @@ package GUI_Control.Admin;
 
 
 
+import Domain.CurrentUser;
 import GUI_Control.Main;
 
 import javafx.fxml.FXML;
@@ -27,7 +28,7 @@ public class AdminSceneController {
         Stage primaryStage = new Stage();
         Parent root = FXMLLoader.load(AdminSceneController.class.getResource("AdminScene.fxml"));
         primaryStage.setTitle("Admin View");
-        primaryStage.setScene(new Scene(root, 600, 400));
+        primaryStage.setScene(new Scene(root, 500, 600));
         primaryStage.show();
     }
 
@@ -52,6 +53,9 @@ public class AdminSceneController {
             //Closing current stage
             Stage stage = (Stage) logOutBtn.getScene().getWindow();
             stage.close();
+
+            //setting current to null to logout user
+            CurrentUser.registerCurrentUser(null);
 
             //start the application from the Login screen using the Main class
             Stage primaryStage = new Stage();

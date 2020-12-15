@@ -26,6 +26,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ResourceBundle;
 
+import static DAO.FlightSchedule_dataAccess.deleteFlight;
+
 public class MyFlightSceneController implements Initializable {
     //My Booked Flight TableView Elements
     @FXML private Button searchFlightButton;
@@ -41,10 +43,12 @@ public class MyFlightSceneController implements Initializable {
 
     //buttons
     @FXML private Button backToMenuBtn;
-    //@FXML private Button cancelFlightBtn;
+    @FXML private Button cancelFlightBtn;
 
     //Book New Flight List
     private final ObservableList<Flight> bookedFlightList = FXCollections.observableArrayList();
+
+    private Flight selectedFlight;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -70,8 +74,22 @@ public class MyFlightSceneController implements Initializable {
         if(actionEvent.getSource() == backToMenuBtn) {
             MainMenuController.MainMenuInitializer(backToMenuBtn);
         }
-
         //else call for flight cancellation method
+
+        else {
+            selectedFlight = myFlightsTableView.getSelectionModel().getSelectedItem();
+
+            try {
+                int cancelledTrip = BookedFlights_dataAccess.cancelFlight(selectedFlight.getFlightID());
+                PopUpAlertBox.display("Confirmation", "Reservation Number " + cancelledTrip + " has been cancelled");
+            } catch (Exception ex) {
+                ex.getMessage();
+                System.out.println(ex);
+            }
+            startMyFlight(cancelFlightBtn);
+        }
+
+
     }
 
 
@@ -85,6 +103,7 @@ public class MyFlightSceneController implements Initializable {
         primaryStage.setScene(new Scene(root, 800, 600));
         primaryStage.show();
     }
+
 
 
 

@@ -14,25 +14,26 @@
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" stylesheets="@Login.css">
          <children>
-            <Label contentDisplay="BOTTOM" layoutX="297.0" layoutY="55.0" prefHeight="40.0" prefWidth="204.0" text="List of Confirmed Reservations" />
+            <Label alignment="CENTER" contentDisplay="BOTTOM" layoutX="-1.0" prefHeight="91.0" prefWidth="800.0" styleClass="header" text="List of Confirmed Reservations" />
          </children></AnchorPane>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="800.0">
          <children>
             <VBox layoutX="-2.0" layoutY="223.0" prefHeight="77.0" prefWidth="600.0" />
             <TableView fx:id="myFlightsTableView" layoutX="9.0" prefHeight="270.0" prefWidth="780.0">
               <columns>
-                <TableColumn fx:id="fligthtNumCol" prefWidth="56.0" text="Flight ID" />
-                <TableColumn fx:id="airlineCol" prefWidth="134.0" text="Airline" />
-                  <TableColumn fx:id="departCityCol" prefWidth="127.0" text="From" />
-                  <TableColumn fx:id="arrivalCityCol" prefWidth="108.0" text="To" />
-                  <TableColumn fx:id="departureDateCol" minWidth="0.0" prefWidth="126.0" text="Date of Flight" />
-                  <TableColumn fx:id="takeOffLandCol" minWidth="0.0" prefWidth="114.0" text="TakeOff and Landing " />
-                  <TableColumn fx:id="flightTimeCol" minWidth="1.0" prefWidth="113.0" text="Flight Duration" />
+                  <TableColumn prefWidth="106.0" text="Confirmation #" />
+                <TableColumn fx:id="fligthtNumCol" prefWidth="68.0" text="Flight ID" />
+                <TableColumn fx:id="airlineCol" prefWidth="98.0" text="Airline" />
+                  <TableColumn fx:id="departCityCol" prefWidth="125.0" text="From" />
+                  <TableColumn fx:id="arrivalCityCol" prefWidth="112.0" text="To" />
+                  <TableColumn fx:id="departureDateCol" minWidth="0.0" prefWidth="78.0" text="Date" />
+                  <TableColumn fx:id="takeOffLandCol" minWidth="0.0" prefWidth="85.0" text="Time" />
+                  <TableColumn fx:id="flightTimeCol" minWidth="1.0" prefWidth="106.0" text="Flight Time" />
               </columns>
             </TableView>
             <HBox layoutX="274.0" layoutY="300.0" prefHeight="49.0" prefWidth="250.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="90.0" text="Cancel Trip">
+                  <Button fx:id="cancelFlightBtn" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="27.0" prefWidth="90.0" text="Cancel Trip">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>

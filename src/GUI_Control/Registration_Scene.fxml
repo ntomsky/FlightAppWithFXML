@@ -31,22 +31,22 @@
                </font>
             </Button>
          </children></HBox>
-      <VBox fillWidth="false" layoutX="146.0" layoutY="35.0" prefHeight="460.0" prefWidth="208.0">
+      <VBox fillWidth="false" layoutX="106.0" layoutY="35.0" prefHeight="460.0" prefWidth="300.0" stylesheets="@Login.css">
          <children>
-            <TextField fx:id="newCustUsername" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" promptText="username" text="user1" VBox.vgrow="ALWAYS">
+            <TextField fx:id="newCustUsername" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="250.0" promptText="username" text="user1" VBox.vgrow="ALWAYS">
                <font>
                   <Font name="Adobe Gurmukhi" size="18.0" />
                </font>
                <VBox.margin>
-                  <Insets bottom="5.0" left="5.0" />
+                  <Insets bottom="5.0" left="25.0" top="2.0" />
                </VBox.margin>
                <padding>
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
             </TextField>
-            <PasswordField fx:id="newCustPassword" alignment="CENTER" prefHeight="25.0" prefWidth="199.0" promptText="password" text="admin">
+            <PasswordField fx:id="newCustPassword" alignment="CENTER" prefHeight="25.0" prefWidth="250.0" promptText="password" text="admin">
                <VBox.margin>
-                  <Insets bottom="5.0" left="5.0" />
+                  <Insets bottom="5.0" left="25.0" top="2.0" />
                </VBox.margin>
                <font>
                   <Font name="Adobe Gurmukhi" size="18.0" />
@@ -55,7 +55,7 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
             </PasswordField>
-            <TextField fx:id="newCustFirstName" alignment="CENTER" layoutX="15.0" layoutY="15.0" prefHeight="25.0" prefWidth="200.0" promptText="First Name" text="mumu">
+            <TextField fx:id="newCustFirstName" alignment="CENTER" layoutX="15.0" layoutY="15.0" prefHeight="25.0" prefWidth="250.0" promptText="First Name" text="mumu">
                <font>
                   <Font name="Adobe Gurmukhi" size="18.0" />
                </font>
@@ -63,10 +63,10 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <VBox.margin>
-                  <Insets bottom="5.0" left="5.0" />
+                  <Insets bottom="5.0" left="25.0" top="2.0" />
                </VBox.margin>
             </TextField>
-            <TextField fx:id="newCustLastName" alignment="CENTER" layoutX="15.0" layoutY="51.0" prefHeight="25.0" prefWidth="200.0" promptText="Last Name" text="tomsky">
+            <TextField fx:id="newCustLastName" alignment="CENTER" layoutX="15.0" layoutY="51.0" prefHeight="25.0" prefWidth="250.0" promptText="Last Name" text="tomsky">
                <font>
                   <Font name="Adobe Gurmukhi" size="18.0" />
                </font>
@@ -74,10 +74,10 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <VBox.margin>
-                  <Insets bottom="5.0" left="5.0" />
+                  <Insets bottom="5.0" left="25.0" top="2.0" />
                </VBox.margin>
             </TextField>
-            <TextField fx:id="newCustStreetAddress" alignment="CENTER" layoutX="15.0" layoutY="138.0" prefHeight="25.0" prefWidth="200.0" promptText="Street Address" text="123 HH drive">
+            <TextField fx:id="newCustStreetAddress" alignment="CENTER" layoutX="15.0" layoutY="138.0" prefHeight="25.0" prefWidth="250.0" promptText="Street Address" text="123 HH drive">
                <font>
                   <Font name="Adobe Gurmukhi" size="18.0" />
                </font>
@@ -85,10 +85,10 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <VBox.margin>
-                  <Insets bottom="5.0" left="5.0" />
+                  <Insets bottom="5.0" left="25.0" top="2.0" />
                </VBox.margin>
             </TextField>
-            <TextField fx:id="newCustCityAddress" alignment="CENTER" layoutX="15.0" layoutY="179.0" prefHeight="25.0" prefWidth="200.0" promptText="City" text="HH">
+            <TextField fx:id="newCustCityAddress" alignment="CENTER" layoutX="15.0" layoutY="179.0" prefHeight="25.0" prefWidth="250.0" promptText="City" text="HH">
                <font>
                   <Font name="Adobe Gurmukhi" size="18.0" />
                </font>
@@ -96,10 +96,10 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <VBox.margin>
-                  <Insets bottom="5.0" left="5.0" />
+                  <Insets bottom="5.0" left="25.0" top="2.0" />
                </VBox.margin>
             </TextField>
-            <TextField fx:id="newCustState" alignment="CENTER" layoutX="15.0" layoutY="220.0" prefHeight="25.0" prefWidth="200.0" promptText="State" text="SC">
+            <TextField fx:id="newCustState" alignment="CENTER" layoutX="15.0" layoutY="220.0" prefHeight="25.0" prefWidth="250.0" promptText="State" text="SC">
                <font>
                   <Font name="Adobe Gurmukhi" size="18.0" />
                </font>
@@ -107,10 +107,10 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <VBox.margin>
-                  <Insets bottom="5.0" left="5.0" />
+                  <Insets bottom="5.0" left="25.0" top="2.0" />
                </VBox.margin>
             </TextField>
-            <TextField fx:id="newCustZip" alignment="CENTER" prefHeight="25.0" prefWidth="200.0" promptText="Zip" text="12345">
+            <TextField fx:id="newCustZip" alignment="CENTER" prefHeight="25.0" prefWidth="250.0" promptText="Zip" text="12345">
                <font>
                   <Font name="Adobe Gurmukhi" size="18.0" />
                </font>
@@ -118,10 +118,10 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <VBox.margin>
-                  <Insets bottom="5.0" left="5.0" />
+                  <Insets bottom="5.0" left="25.0" top="2.0" />
                </VBox.margin>
             </TextField>
-            <TextField fx:id="newCustPhoneNumber" alignment="CENTER" layoutX="10.0" layoutY="215.0" prefHeight="25.0" prefWidth="200.0" promptText="Phone Number" text="404542">
+            <TextField fx:id="newCustPhoneNumber" alignment="CENTER" layoutX="10.0" layoutY="215.0" prefHeight="25.0" prefWidth="250.0" promptText="Phone Number" text="404542">
                <font>
                   <Font name="Adobe Gurmukhi" size="18.0" />
                </font>
@@ -129,10 +129,10 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <VBox.margin>
-                  <Insets bottom="5.0" left="5.0" />
+                  <Insets bottom="5.0" left="25.0" top="2.0" />
                </VBox.margin>
             </TextField>
-            <TextField fx:id="newCustEmail" alignment="CENTER" layoutX="10.0" layoutY="246.0" prefHeight="25.0" prefWidth="200.0" promptText="email" text="email.com">
+            <TextField fx:id="newCustEmail" alignment="CENTER" layoutX="10.0" layoutY="246.0" prefHeight="25.0" prefWidth="250.0" promptText="email" text="email.com">
                <font>
                   <Font name="Adobe Gurmukhi" size="18.0" />
                </font>
@@ -140,21 +140,21 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <VBox.margin>
-                  <Insets bottom="5.0" left="5.0" />
+                  <Insets bottom="5.0" left="25.0" top="2.0" />
                </VBox.margin>
             </TextField>
-            <Label alignment="CENTER" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: white;" text="Security Question">
+            <Label alignment="CENTER" prefHeight="25.0" prefWidth="250.0" stylesheets="@Login.css" text="Security Question">
                <font>
                   <Font name="Adobe Gurmukhi" size="18.0" />
                </font>
                <VBox.margin>
-                  <Insets bottom="5.0" left="5.0" />
+                  <Insets bottom="5.0" left="25.0" top="2.0" />
                </VBox.margin>
                <opaqueInsets>
                   <Insets left="2.0" />
                </opaqueInsets>
             </Label>
-            <ComboBox fx:id="newCustSecQuestion" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" prefWidth="200.0">
+            <ComboBox fx:id="newCustSecQuestion" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="29.0" prefWidth="250.0">
                <items>
                   <FXCollections fx:factory="observableArrayList">
                      <String fx:value="What is Favorite Sport?" />
@@ -163,22 +163,19 @@
                   </FXCollections>
                </items>
                <VBox.margin>
-                  <Insets bottom="5.0" left="5.0" />
+                  <Insets bottom="5.0" left="25.0" top="2.0" />
                </VBox.margin>
-               <padding>
-                  <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-               </padding>
 
             </ComboBox>
-            <Label alignment="CENTER" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: white;" text="Secret Answer">
+            <Label alignment="CENTER" prefHeight="25.0" prefWidth="250.0" style="-fx-background-color: white;" stylesheets="@Login.css" text="Secret Answer">
                <font>
                   <Font name="Adobe Gurmukhi" size="18.0" />
                </font>
                <VBox.margin>
-                  <Insets bottom="5.0" left="5.0" />
+                  <Insets bottom="5.0" left="25.0" top="2.0" />
                </VBox.margin>
             </Label>
-            <TextField fx:id="newCustSecretAnswer" alignment="CENTER" layoutX="12.0" layoutY="291.0" prefHeight="25.0" prefWidth="200.0" promptText="Secret Answer" text="hockey">
+            <TextField fx:id="newCustSecretAnswer" alignment="CENTER" layoutX="12.0" layoutY="291.0" prefHeight="25.0" prefWidth="250.0" promptText="Secret Answer" text="hockey">
                <font>
                   <Font name="Adobe Gurmukhi" size="18.0" />
                </font>
@@ -186,12 +183,12 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
                <VBox.margin>
-                  <Insets bottom="5.0" left="5.0" />
+                  <Insets bottom="5.0" left="25.0" top="2.0" />
                </VBox.margin>
             </TextField>
-            <TextField fx:id="newCustSSN" alignment="CENTER" prefHeight="25.0" prefWidth="200.0" promptText="SSN" text="111-222-3344">
+            <TextField fx:id="newCustSSN" alignment="CENTER" prefHeight="25.0" prefWidth="250.0" promptText="SSN" text="111-222-3344">
                <VBox.margin>
-                  <Insets bottom="5.0" left="5.0" />
+                  <Insets bottom="5.0" left="25.0" top="2.0" />
                </VBox.margin>
                <padding>
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />

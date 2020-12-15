@@ -1,32 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<SplitPane id="find-plane" dividerPositions="0.21105527638190955" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="600.0" prefWidth="800.0" stylesheets="@Login.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI_Control.BookNewFlightController">
+<SplitPane id="find-plane" dividerPositions="0.21105527638190955" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="600.0" prefWidth="800.0" stylesheets="@Login.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI_Control.BookNewFlightController">
   <items>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="316.0" prefWidth="598.0">
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="316.0" prefWidth="598.0" stylesheets="@Login.css">
          <children>
-            <VBox layoutX="118.0" prefHeight="73.0" prefWidth="526.0">
+            <VBox layoutX="85.0" prefHeight="100.0" prefWidth="629.0">
                <children>
-                  <HBox prefHeight="30.0" prefWidth="644.0">
+                  <HBox prefHeight="77.0" prefWidth="629.0" />
+                  <HBox prefHeight="41.0" prefWidth="506.0">
                      <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="457.0" text="Find and book your next flight">
-                           <HBox.margin>
-                              <Insets left="100.0" />
-                           </HBox.margin>
-                           <font>
-                              <Font name="Adobe Gurmukhi" size="18.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="41.0" prefWidth="644.0">
-                     <children>
-                        <ChoiceBox prefHeight="27.0" prefWidth="166.0" />
-                        <TextField fx:id="filteredField" prefHeight="27.0" prefWidth="200.0" promptText="Where to?">
+                        <TextField fx:id="filteredFromField" accessibleRole="BUTTON" prefHeight="27.0" prefWidth="200.0" promptText="From" />
+                        <TextField fx:id="filteredWhereField" prefHeight="27.0" prefWidth="200.0" promptText="Where to?">
                            <HBox.margin>
                               <Insets left="5.0" />
                            </HBox.margin></TextField>
@@ -35,24 +32,32 @@
                               <Insets left="5.0" />
                            </HBox.margin>
                         </DatePicker>
-                        <Button fx:id="searchFlightButton" mnemonicParsing="false" text="Search" />
+                        <Button fx:id="searchFlightButton" mnemonicParsing="false" text="Search">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin></Button>
                      </children>
                      <VBox.margin>
-                        <Insets left="50.0" />
+                        <Insets top="20.0" />
                      </VBox.margin>
                   </HBox>
                </children>
             </VBox>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="62.0" prefWidth="800.0" styleClass="header" stylesheets="@Login.css" text="Find and book your next flight">
+               <font>
+                  <Font name="Adobe Gurmukhi" size="18.0" />
+               </font>
+            </Label>
          </children></AnchorPane>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="800.0">
          <children>
             <TableView fx:id="flightScheduleTableView" layoutX="11.0" layoutY="7.0" prefHeight="284.0" prefWidth="773.0">
               <columns>
-                  <TableColumn fx:id="fligthtNumCol" prefWidth="63.0" text="FLIGHT ID" />
-                  <TableColumn fx:id="airlineCol" prefWidth="105.0" text="AIRLINE" />
-                  <TableColumn fx:id="departCityCol" prefWidth="114.0" text="FROM" />
-                  <TableColumn fx:id="arrivalCityCol" prefWidth="107.0" text="TO" />
-                  <TableColumn fx:id="departureDateCol" prefWidth="81.0" text="DATE" />
+                  <TableColumn fx:id="fligthtNumCol" prefWidth="77.0" text="FLIGHT ID" />
+                  <TableColumn fx:id="airlineCol" prefWidth="77.0" text="AIRLINE" />
+                  <TableColumn fx:id="departCityCol" prefWidth="117.0" text="FROM" />
+                  <TableColumn fx:id="arrivalCityCol" prefWidth="120.0" text="TO" />
+                  <TableColumn fx:id="departureDateCol" prefWidth="79.0" text="DATE" />
                   <TableColumn fx:id="takeOffLandCol" prefWidth="99.0" text="WHEN" />
                   <TableColumn fx:id="flightTimeCol" prefWidth="57.0" text="TIME" />
                   <TableColumn fx:id="ticketPriceCol" prefWidth="59.0" text="PRICE" />
@@ -67,11 +72,12 @@
                   <Font name="Adobe Gurmukhi" size="18.0" />
                </font>
             </Button>
-            <Button fx:id="bookFlightBtn" layoutX="369.0" layoutY="341.0" mnemonicParsing="false" onAction="#bookNewFlight" text="Book">
+            <Button fx:id="bookFlightBtn" layoutX="251.0" layoutY="342.0" mnemonicParsing="false" onAction="#bookingButtonHandler" prefHeight="30.0" prefWidth="104.0" text="Book">
                <font>
                   <Font name="Adobe Gurmukhi" size="18.0" />
                </font>
             </Button>
+            <Button fx:id="seeBookedBtn" layoutX="437.0" layoutY="342.0" minHeight="30.0" minWidth="90.0" mnemonicParsing="false" onAction="#bookingButtonHandler" text="View My Flights" />
          </children></AnchorPane>
   </items>
 </SplitPane>

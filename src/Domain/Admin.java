@@ -2,14 +2,13 @@ package Domain;
 
 public class Admin extends User{
 
-    public String getMyNewValue() {
-        return myNewValue;
+
+    public Admin(){
+
     }
 
-    public void setMyNewValue(String myNewValue) {
-        this.myNewValue = myNewValue;
+    public Admin(String username) {
+        setUserName(username);
     }
-
-    String myNewValue = "myNewValue";
 
 }

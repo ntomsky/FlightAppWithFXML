@@ -6,6 +6,8 @@ import Domain.*;
 import GUI_Control.Admin.PopUpBoxes.PopUpAlertBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -29,7 +31,8 @@ public class BookNewFlightController implements Initializable {
     //Book New Flight TableView Elements
     @FXML private Button searchFlightButton;
     @FXML private TableView<Flight> flightScheduleTableView;
-    @FXML private TextField filteredField;
+    @FXML private TextField filteredWhereField;
+    @FXML private TextField filteredFromField;
     @FXML private TableColumn<Flight, Integer> fligthtNumCol;
     @FXML private TableColumn<Flight, Integer> airlineCol;
     @FXML private TableColumn<Flight, String> departCityCol;
@@ -49,6 +52,7 @@ public class BookNewFlightController implements Initializable {
     private Flight selectedFlight;
     //Book Flight Button
     @FXML private Button bookFlightBtn;
+    @FXML private Button seeBookedBtn;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -72,6 +76,72 @@ public class BookNewFlightController implements Initializable {
 
         flightScheduleTableView.setItems(flightScheduleDataList);
 
+        //wrap the observable list in FilteredList
+        FilteredList<Flight> filteredData = new FilteredList<>(flightScheduleDataList, b -> true);
+
+            //set the filter predicate whenever the filter changes
+            filteredFromField.textProperty().addListener((observable, oldValue, newValue) ->{
+                    filteredData.setPredicate(flight -> {
+
+                        //if empty show all
+                        if(newValue == null || newValue.isEmpty())
+                        {
+                            return true;
+                        }
+
+                        //compare departure and arrival cities
+                        String lowerCaseFiler = newValue.toLowerCase();
+
+                        if(flight.getDepartureCity().toLowerCase().contains(lowerCaseFiler)){
+                            return true;//filter matches first letter of a city
+                        }
+//                        else if(flight.getArrivalCity().toLowerCase().contains(lowerCaseFiler)){
+//                            return true;//matches arrival city name
+//                        }
+                        else
+                            return false;
+
+
+                    });
+            });
+            filteredWhereField.textProperty().addListener((observable, oldValue, newValue) ->{
+                    filteredData.setPredicate(flight -> {
+
+                        //if empty show all
+                        if(newValue == null || newValue.isEmpty())
+                        {
+                            return true;
+                        }
+
+                        //compare departure and arrival cities
+                        String lowerCaseFiler = newValue.toLowerCase();
+
+//                        if(flight.getDepartureCity().toLowerCase().contains(lowerCaseFiler)){
+//                            return true;//filter matches first letter of a city
+//                        }
+                        if(flight.getArrivalCity().toLowerCase().contains(lowerCaseFiler)){
+                            return true;//matches arrival city name
+                        }
+                        else
+                            return false;
+
+
+                    });
+            });
+
+
+        // 3. Wrap the FilteredList in a SortedList.
+        SortedList<Flight> sortedData = new SortedList<>(filteredData);
+
+        // 4. Bind the SortedList comparator to the TableView comparator.
+        // 	  Otherwise, sorting the TableView would have no effect.
+        sortedData.comparatorProperty().bind(flightScheduleTableView.comparatorProperty());
+
+        // 5. Add sorted (and filtered) data to the table.
+        flightScheduleTableView.setItems(sortedData);
+
+
+
     }
 
     //Call to Book New Flight Scene
@@ -89,31 +159,35 @@ public class BookNewFlightController implements Initializable {
         MainMenuController.MainMenuInitializer(backToMainButton);
     }
 
-    public void bookNewFlight(javafx.event.ActionEvent event){
+    public void bookingButtonHandler(javafx.event.ActionEvent event) throws IOException {
 
         //assigning selected row to a new object
         if(event.getSource() == bookFlightBtn) {
             selectedFlight = flightScheduleTableView.getSelectionModel().getSelectedItem();
-        }
 
-        try{
-            //sending request to DB for processing
-            int result = BookedFlights_dataAccess.bookFlight(CurrentUser.getCurrentUser(),selectedFlight.getFlightID());
-            if(result == -1){
-                PopUpAlertBox.display("Full Capacity", "We are sorry, this flight is already full");
-                return;
+
+            try {
+                //sending request to DB for processing
+                int result = BookedFlights_dataAccess.bookFlight(CurrentUser.getCurrentUser(), selectedFlight.getFlightID());
+                if (result == -1) {
+                    PopUpAlertBox.display("Full Capacity", "We are sorry, this flight is already full");
+                    return;
+                } else if (result == -2) {
+                    PopUpAlertBox.display("Double Booking", "It looks like you already have a seat on this flight!");
+                    return;
+                } else
+                    PopUpAlertBox.display("Confirmation", "Congratulations! Your Flight has been booked!");
+                toBookNewFlightScene();
+            } catch (Exception ex) {
+                ex.getMessage();
+                PopUpAlertBox.display("Oops!", "Something went wrong. Please try again later");
             }
-            else if (result == -2){
-                PopUpAlertBox.display("Double Booking", "It looks like you already have a seat on this flight!");
-                return;
-            }
-            else
-            PopUpAlertBox.display("Confirmation", "Congratulations! Your Flight has been booked!");
         }
-        catch (Exception ex){
-            ex.getMessage();
-            PopUpAlertBox.display("Oops!", "Something went wrong. Please try again later");
-        }
+        else
+            //close the stage and switch to MyFlight
+
+            MyFlightSceneController.startMyFlight(seeBookedBtn);
+
 
     }
 

@@ -1,5 +1,6 @@
 package GUI_Control;
 
+import Domain.CurrentUser;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,10 +12,12 @@ import java.io.IOException;
 
 public class PasswordResetController {
 
+    //buttons
     @FXML private Button submitBtn;
+    @FXML private Button backBtn;
 
     //starts Password Reset Screen
-    protected static void startPasswordReset(Button btn) throws IOException {
+    public static void startPasswordReset(Button btn) throws IOException {
         Stage stage = (Stage) btn.getScene().getWindow();
         stage.close();
         Stage primaryStage = new Stage();
@@ -23,10 +26,20 @@ public class PasswordResetController {
         primaryStage.setScene(new Scene(root, 500, 600));
         primaryStage.show();
     }
-    public void handleButtonAction(javafx.event.ActionEvent actionEvent) throws IOException {
+    public void handleButtonAction(javafx.event.ActionEvent actionEvent) throws Exception {
 
         if(actionEvent.getSource() == submitBtn) {
             MainMenuController.MainMenuInitializer(submitBtn);
+        }
+        else if(actionEvent.getSource() == backBtn) {
+            //Closing current stage
+            Stage stage = (Stage) backBtn.getScene().getWindow();
+            stage.close();
+
+
+            //start the application from the Login screen using the Main class
+            Stage primaryStage = new Stage();
+            new Main().start(primaryStage);
         }
 
         //else call for flight cancellation method

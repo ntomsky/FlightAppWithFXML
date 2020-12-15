@@ -78,6 +78,73 @@ public class BookedFlights_dataAccess {
         return 0;
 
     }
+    public static int cancelFlight(int flightID) throws ClassNotFoundException, SQLException {
+
+        int cancelledResNum = -1;
+
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection connection = DriverManager.getConnection(URL, getDbUserName(), getDbPassword());
+        System.out.println("DB Connected");
+
+
+        // this method pulls reservation number before canceling, so that it can be returned to GUI
+        //for confirmaion
+        try {
+            PreparedStatement statement = connection.prepareStatement(GET_CONFIRMATION_NUM);
+            statement.setInt(1, ((Customer)CurrentUser.getCurrentUser()).getCustomer_id());
+            statement.setInt(2, flightID);
+
+            //execute
+           ResultSet rs = statement.executeQuery();
+
+           if(rs.next()){
+               cancelledResNum = rs.getInt(1);
+           }
+
+        }
+        catch (SQLException throwables) {
+            throwables.getStackTrace();
+            connection.close();
+            throw new SQLException("error in canceling flight");
+        }
+
+
+        //this method deletes confirmation number based on user's id and flight_id selected from myFlightView
+        try {
+            PreparedStatement statement = connection.prepareStatement(CANCEL_FLIGHT);
+            statement.setInt(1, ((Customer)CurrentUser.getCurrentUser()).getCustomer_id());
+            statement.setInt(2, flightID);
+
+            //execute
+            statement.executeUpdate();
+
+            }
+        catch (SQLException throwables) {
+            throwables.getStackTrace();
+            connection.close();
+            throw new SQLException("error in canceling flight");
+
+        }
+
+        //this query adjusts available number of seats to += 1
+        try {
+            PreparedStatement statement = connection.prepareStatement(CREDIT_SEAT);
+            statement.setInt(1, flightID);
+            statement.executeUpdate();
+        }
+        catch (SQLException throwables) {
+            throwables.getStackTrace();
+            connection.close();
+            throw new SQLException("error in adjusting Seats after cancellation");
+
+        }
+
+        System.out.println("Reservation has been cancelled");
+
+        //returns cancelled confirmation num or -1
+        return cancelledResNum;
+
+    }
 
     //this method returns the list of confirmed booked flights based on customers id
     public static ArrayList<Flight> getBookings(User user) throws ClassNotFoundException, SQLException {
@@ -134,7 +201,7 @@ public class BookedFlights_dataAccess {
         finally {
                 connection.close();
             }
-        
+
         return listOfBooked;
     }
 }

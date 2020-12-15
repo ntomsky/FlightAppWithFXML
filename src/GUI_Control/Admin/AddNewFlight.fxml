@@ -11,10 +11,10 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI_Control.Admin.AddNewFlightController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="@../Login.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI_Control.Admin.AddNewFlightController">
    <children>
       <Button fx:id="backBtn" layoutX="39.0" layoutY="537.0" mnemonicParsing="false" onAction="#handleBackButtonAction" prefHeight="27.0" prefWidth="96.0" text="Back" />
-      <GridPane layoutX="126.0" layoutY="135.0" prefHeight="238.0" prefWidth="549.0">
+      <GridPane layoutX="126.0" layoutY="135.0" prefHeight="238.0" prefWidth="549.0" AnchorPane.topAnchor="100.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="302.0" minWidth="10.0" prefWidth="274.0" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="297.0" minWidth="10.0" prefWidth="275.0" />
@@ -77,7 +77,7 @@
             </DatePicker>
          </children>
       </GridPane>
-      <Label layoutX="262.0" layoutY="67.0" text="Please fill out the new flight details below">
+      <Label alignment="CENTER" layoutY="-1.0" prefHeight="84.0" prefWidth="802.0" styleClass="header" text="Please fill out the new flight details below">
          <font>
             <Font name="Adobe Gurmukhi" size="18.0" />
          </font>

@@ -46,8 +46,11 @@ public class Controller {
     @FXML
     private Button backToLogInBtn;
 
+    //Login Menu Button
     @FXML
     private Button loginBtn;
+    @FXML
+    private Button resetPassord;
 
     @FXML
     private Button completeRegistration;
@@ -57,6 +60,9 @@ public class Controller {
 
         if(actionEvent.getSource() == MyFlightsBtn) {
             MyFlightSceneController.startMyFlight(MyFlightsBtn);
+        }
+        else if(actionEvent.getSource() == resetPassord) {
+            PasswordResetController.startPasswordReset(resetPassord);
         }
 
         //else call for flight cancellation method
@@ -79,6 +85,8 @@ public class Controller {
                 return;
             } else if (Admin_dataAccess.isAdmin(username)) {
                 //TODO create admin instance here
+                Admin activeAdmin = new Admin(username);
+                CurrentUser.registerCurrentUser(activeAdmin);
                 transitionToAdminScene();
                 break;
 
@@ -131,58 +139,71 @@ public class Controller {
     }
 
     //Collecting Data from Registration Scene to create new customer in DB
-    public void processRegistration() throws SQLException, ClassNotFoundException, IOException {
+    public void processRegistration(javafx.event.ActionEvent event) throws Exception {
 
         //check if username is available
         if (isUsernameValid(newCustUsername.getText())) {
-            PopUpAlertBox.display("Username Already Exists","Please select a different Username");
+            PopUpAlertBox.display("Username Already Exists", "Please select a different Username");
             return;
         }
 
         //check SSN format
-         if(!EntryVerifiers.isSSN_Valid(newCustSSN.getText()))
-         {
-             //Popup on wrong input
-            PopUpAlertBox.display("Incorrect SSN entry","your SSN format should match xxx-xxx-xxxx, where x is a digit");
+        if (!EntryVerifiers.isSSN_Valid(newCustSSN.getText())) {
+            //Popup on wrong input
+            PopUpAlertBox.display("Incorrect SSN entry", "your SSN format should match xxx-xxx-xxxx, where x is a digit");
             return;
-         }
-         //checks if this SSN already exists
-         else if(isSSN_Unique(SSNtoDigits(newCustSSN.getText()))){
-             PopUpAlertBox.display("This SSN already exists ", "Please check your SSN, if correct, reset your password");
-             return;
-         }
+        }
+        //checks if this SSN already exists
+        else if (isSSN_Unique(SSNtoDigits(newCustSSN.getText()))) {
+            PopUpAlertBox.display("This SSN already exists ", "Please check your SSN, if correct, reset your password");
+            return;
+        }
 
 //            //create new Customer entity
-            Customer customer = new Customer((
-                    EntryVerifiers.SSNtoDigits(newCustSSN.getText())),
-                    newCustUsername.getText(),
-                    newCustPassword.getText(),
-                    newCustFirstName.getText(),
-                    newCustLastName.getText(),
-                    newCustStreetAddress.getText(),
-                    newCustCityAddress.getText(),
-                    newCustState.getText(),
-                    newCustZip.getText(),
-                    newCustPhoneNumber.getText(),
-                    newCustEmail.getText(),
-                    newCustSecQuestion.getValue(),
-                    newCustSecretAnswer.getText());
+        Customer customer = new Customer((
+                EntryVerifiers.SSNtoDigits(newCustSSN.getText())),
+                newCustUsername.getText(),
+                newCustPassword.getText(),
+                newCustFirstName.getText(),
+                newCustLastName.getText(),
+                newCustStreetAddress.getText(),
+                newCustCityAddress.getText(),
+                newCustState.getText(),
+                newCustZip.getText(),
+                newCustPhoneNumber.getText(),
+                newCustEmail.getText(),
+                newCustSecQuestion.getValue(),
+                newCustSecretAnswer.getText());
 
         //insert new customer in DB
-        try{
+        try {
             Customer_dataAccess.registerNewCustomer(customer);
-        }
-        catch (Exception ex){
+        } catch (Exception ex) {
             PopUpAlertBox.display("Error", "Please fill out all information");
             ex.getMessage();
             return;
         }
 
-        PopUpAlertBox.display("Confirmation", "Thank you for registering with us!");
-        //if success proceed to main menu scen
+        //closing scene
+        Stage stage = (Stage) completeRegistration.getScene().getWindow();
+        stage.close();
 
-        //Return to login;
-        transitionToMainMenu(completeRegistration);
+
+        //select   menu and message based on active user
+        //if admin
+        if ((CurrentUser.getCurrentUser() instanceof Admin)) {
+            PopUpAlertBox.display("Registration Confirmed", "" + customer.getUserName() + " has been added");
+            AdminSceneController.initialize();
+        }
+        //if customer
+        else {
+            PopUpAlertBox.display("Confirmation", "Thank you for registering with us!");
+            //start the application from the Login screen using
+            // the Main class to let use login with  created login and password
+            Stage primaryStage = new Stage();
+            new Main().start(primaryStage);
+
+        }
     }
 
     //to main Menu transition
@@ -197,17 +218,6 @@ public class Controller {
         primaryStage.setScene(new Scene(root, 500, 600));
         primaryStage.show();
     }
-
-    //Call to My Flight Scene
-//    public void toMyFlightScene() throws IOException {
-//        Stage stage = (Stage) MyFlightsBtn.getScene().getWindow();
-//        stage.close();
-//        Stage primaryStage = new Stage();
-//        Parent root = FXMLLoader.load(getClass().getResource("MyFlightScene.fxml"));
-//        primaryStage.setTitle("My Flights");
-//        primaryStage.setScene(new Scene(root, 800, 600));
-//        primaryStage.show();
-//    }
 
     //Call to Book New Flight Scene
     public void transitionToBookNewFlight() throws IOException {
