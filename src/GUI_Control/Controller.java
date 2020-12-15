@@ -6,6 +6,7 @@ import static DAO.Customer_dataAccess.*;
 import Domain.*;
 import GUI_Control.Admin.AdminSceneController;
 import GUI_Control.Admin.PopUpBoxes.PopUpAlertBox;
+import static Helpers.EntryVerifiers.*;
 import Helpers.EntryVerifiers;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -50,6 +51,16 @@ public class Controller {
 
     @FXML
     private Button completeRegistration;
+
+    //Button handler
+    public void handleButtonAction(javafx.event.ActionEvent actionEvent) throws IOException {
+
+        if(actionEvent.getSource() == MyFlightsBtn) {
+            MyFlightSceneController.startMyFlight(MyFlightsBtn);
+        }
+
+        //else call for flight cancellation method
+    }
 
     //User Login from the Login Screen
     public void userLogin() throws IOException, SQLException, ClassNotFoundException {
@@ -102,8 +113,8 @@ public class Controller {
 
         Stage primaryStage = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("Registration_Scene.fxml"));
-        primaryStage.setTitle("Registration");
-        primaryStage.setScene(new Scene(root, 600, 400));
+        primaryStage.setTitle("Let us get to know you");
+        primaryStage.setScene(new Scene(root, 500, 600));
         primaryStage.show();
     }
 
@@ -115,7 +126,7 @@ public class Controller {
         Stage primaryStage = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("LoginScene.fxml"));
         primaryStage.setTitle("Welcome to Friendly Skies");
-        primaryStage.setScene(new Scene(root, 600, 400));
+        primaryStage.setScene(new Scene(root, 500, 600));
         primaryStage.show();
     }
 
@@ -127,12 +138,18 @@ public class Controller {
             PopUpAlertBox.display("Username Already Exists","Please select a different Username");
             return;
         }
+
         //check SSN format
          if(!EntryVerifiers.isSSN_Valid(newCustSSN.getText()))
          {
-             //later alert box , sout to terminal for now
+             //Popup on wrong input
             PopUpAlertBox.display("Incorrect SSN entry","your SSN format should match xxx-xxx-xxxx, where x is a digit");
             return;
+         }
+         //checks if this SSN already exists
+         else if(isSSN_Unique(SSNtoDigits(newCustSSN.getText()))){
+             PopUpAlertBox.display("This SSN already exists ", "Please check your SSN, if correct, reset your password");
+             return;
          }
 
 //            //create new Customer entity
@@ -156,8 +173,8 @@ public class Controller {
             Customer_dataAccess.registerNewCustomer(customer);
         }
         catch (Exception ex){
+            PopUpAlertBox.display("Error", "Please fill out all information");
             ex.getMessage();
-            ex.printStackTrace();
             return;
         }
 
@@ -177,20 +194,20 @@ public class Controller {
         Stage primaryStage = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("MainMenuScene.fxml"));
         primaryStage.setTitle("Main Menu");
-        primaryStage.setScene(new Scene(root, 600, 400));
+        primaryStage.setScene(new Scene(root, 500, 600));
         primaryStage.show();
     }
 
     //Call to My Flight Scene
-    public void toMyFlightScene() throws IOException {
-        Stage stage = (Stage) MyFlightsBtn.getScene().getWindow();
-        stage.close();
-        Stage primaryStage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("MyFlightScene.fxml"));
-        primaryStage.setTitle("My Flights");
-        primaryStage.setScene(new Scene(root, 600, 400));
-        primaryStage.show();
-    }
+//    public void toMyFlightScene() throws IOException {
+//        Stage stage = (Stage) MyFlightsBtn.getScene().getWindow();
+//        stage.close();
+//        Stage primaryStage = new Stage();
+//        Parent root = FXMLLoader.load(getClass().getResource("MyFlightScene.fxml"));
+//        primaryStage.setTitle("My Flights");
+//        primaryStage.setScene(new Scene(root, 800, 600));
+//        primaryStage.show();
+//    }
 
     //Call to Book New Flight Scene
     public void transitionToBookNewFlight() throws IOException {
@@ -206,9 +223,4 @@ public class Controller {
         stage.close();
         AdminSceneController.initialize();
     }
-//
-//    @Override
-//    public void initialize(java.net.URL location, ResourceBundle resources) {
-//    }
-
 }

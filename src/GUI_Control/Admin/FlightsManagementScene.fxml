@@ -8,12 +8,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI_Control.Admin.FlightsManagementController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="@../Login.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI_Control.Admin.FlightsManagementController">
    <children>
-      <TableView fx:id="flightScheduleTableView" layoutX="42.0" layoutY="61.0" prefHeight="271.0" prefWidth="716.0">
+      <TableView fx:id="flightScheduleTableView" layoutX="42.0" layoutY="61.0" prefHeight="271.0" prefWidth="716.0" styleClass="button">
         <columns>
-            <TableColumn fx:id="flightNumCol" prefWidth="55.0" text="Flight #" />
-            <TableColumn fx:id="airlineCol" prefWidth="103.0" text="Airline" />
+            <TableColumn fx:id="flightNumCol" prefWidth="75.0" text="Flight #" />
+            <TableColumn fx:id="airlineCol" prefWidth="83.0" text="Airline" />
           <TableColumn fx:id="departCityCol" prefWidth="88.0" text="From" />
             <TableColumn fx:id="arrivalCityCol" prefWidth="108.0" text="To" />
             <TableColumn fx:id="departureTimeCol" prefWidth="58.0" text="Depart" />
@@ -24,7 +24,7 @@
         </columns>
       </TableView>
       <Button fx:id="backToAdminbtn" layoutX="42.0" layoutY="519.0" mnemonicParsing="false" onAction="#handleBackButtonAction" prefHeight="27.0" prefWidth="110.0" text="Back" />
-      <Label alignment="CENTER" layoutX="306.0" layoutY="28.0" prefHeight="33.0" prefWidth="158.0" text="Flights Schedule" />
+      <Label alignment="CENTER" layoutX="308.0" layoutY="14.0" prefHeight="33.0" prefWidth="158.0" style="-fx-text-fill: white;" text="Flights Schedule" />
       <HBox layoutX="275.0" layoutY="378.0" prefHeight="50.0" prefWidth="251.0">
          <children>
             <Button fx:id="addNewFlightBtn" mnemonicParsing="false" onAction="#transitionToAddNewFlight" prefHeight="27.0" prefWidth="100.0" text="Add Flights" />

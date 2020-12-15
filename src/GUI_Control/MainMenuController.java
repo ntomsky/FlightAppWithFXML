@@ -19,7 +19,7 @@ public class MainMenuController {
         Stage primaryStage = new Stage();
         Parent root = FXMLLoader.load(MainMenuController.class.getResource("MainMenuScene.fxml"));
         primaryStage.setTitle("Main Menu");
-        primaryStage.setScene(new Scene(root, 600, 400));
+        primaryStage.setScene(new Scene(root, 500, 600));
         primaryStage.show();
 
     }

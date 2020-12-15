@@ -12,6 +12,7 @@ public class DBQueries {
     public static final String USERNAME_VALIDATION = "SELECT Username from Users where Username = ?;";
     public static final String PASSWORD_VALIDATION = "SELECT password from Users where Username = ?;";
     public static final String GET_ID= "SELECT SSN from Users where Username = ?;";
+    public static final String IS_SSN_UNIQUE= "SELECT SSN from Users where SSN = ?;";
 
 
     //new customer and new fllight registration
@@ -26,6 +27,20 @@ public class DBQueries {
                                             "F.Arrival_Time, F.Ticket_Price, F.Flight_Cap\n" +
                                             "FROM FLIGHT_SCHEDULE F, Airlines A" +
             "                                   WHERE A.Airline_ID = F.Airline_ID;";
+    //query to pull flights based on userID
+    public static final String QUERY_BOOKED_FLIGHT_IDs =
+            "                                                       (SELECT FLIGHT_ID\n" +
+            "                                                        FROM Booked_Flights\n" +
+            "                                                         WHERE SSN = ?);";
+
+//    //query list of flights
+    public static final String BOOKED_FLIGHTS ="SELECT F.Flight_ID, A.Airline_Name, F.Departure_City, F.Arrival_City," +
+        "F.Departure_Date, F.Departure_Time,\n" +
+        "F.Arrival_Time, F.Ticket_Price, F.Flight_Cap\n" +
+        "FROM FLIGHT_SCHEDULE F, Airlines A " +
+        "                                   WHERE A.Airline_ID = F.Airline_ID AND F.Flight_ID = ?;";
+
+
     //validation queries
     public static final String CHECK_IF_USER_ADMIN_QUERY = "SELECT isAdmin FROM Users WHERE Username = ?;";
     public static final String PULL_AIRLINE_ID = "SELECT airline_id FROM Airlines WHERE Airline_Name = ?;";

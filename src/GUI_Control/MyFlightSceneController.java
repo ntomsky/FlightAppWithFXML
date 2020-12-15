@@ -1,17 +1,25 @@
 package GUI_Control;
 
+import DAO.BookedFlights_dataAccess;
 import DAO.FlightSchedule_dataAccess;
-import Domain.Flight;
+import Domain.*;
+import GUI_Control.Admin.FlightsManagementController;
+import GUI_Control.Admin.PopUpBoxes.PopUpAlertBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -31,8 +39,12 @@ public class MyFlightSceneController implements Initializable {
     @FXML private TableColumn<Flight, String> flightTimeCol;
     @FXML private TableColumn<Flight, String> takeOffLandCol;
 
+    //buttons
+    @FXML private Button backToMenuBtn;
+    //@FXML private Button cancelFlightBtn;
+
     //Book New Flight List
-    private final ObservableList<Flight> flightScheduleDataList = FXCollections.observableArrayList();
+    private final ObservableList<Flight> bookedFlightList = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -45,12 +57,35 @@ public class MyFlightSceneController implements Initializable {
         flightTimeCol.setCellValueFactory(new PropertyValueFactory<>("flightTime"));
 
         try {
-            flightScheduleDataList.addAll(FlightSchedule_dataAccess.getListOfFlights());
+            bookedFlightList.addAll(BookedFlights_dataAccess.getBookings(CurrentUser.getCurrentUser()));
         } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
+            System.out.println("Error in getting list of booked flights from Booked_flights Class");
+            PopUpAlertBox.display("Oops","Something went wrong, Contact Support");
+        }
+            myFlightsTableView.setItems(bookedFlightList);
+    }
+    //Btn handler
+    public void handleButtonAction(javafx.event.ActionEvent actionEvent) throws IOException {
+
+        if(actionEvent.getSource() == backToMenuBtn) {
+            MainMenuController.MainMenuInitializer(backToMenuBtn);
         }
 
-        myFlightsTableView.setItems(flightScheduleDataList);
-
+        //else call for flight cancellation method
     }
+
+
+    //starts MyFlight Screen
+    protected static void startMyFlight(Button btn) throws IOException {
+        Stage stage = (Stage) btn.getScene().getWindow();
+        stage.close();
+        Stage primaryStage = new Stage();
+        Parent root = FXMLLoader.load(MyFlightSceneController.class.getResource("MyFlightScene.fxml"));
+        primaryStage.setTitle("My Flights");
+        primaryStage.setScene(new Scene(root, 800, 600));
+        primaryStage.show();
+    }
+
+
+
 }

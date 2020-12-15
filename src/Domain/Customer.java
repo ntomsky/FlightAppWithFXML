@@ -47,10 +47,6 @@ public class Customer extends User{
         setUserName(username);
     }
 
-    private void initializeFields(Customer customer){
-
-    }
-
     public int getCustomer_id() {
         return customer_id;
     }

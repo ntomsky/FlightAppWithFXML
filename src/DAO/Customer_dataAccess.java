@@ -28,6 +28,30 @@ public class Customer_dataAccess {
             connection.close();
            }
     }
+    //Validating SSN uniqueness
+    public static boolean isSSN_Unique(int SSN) throws ClassNotFoundException, SQLException {
+
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection connection = DriverManager.getConnection(URL, getDbUserName(),getDbPassword());
+        System.out.println("DB Connected");
+
+        PreparedStatement statement = connection.prepareStatement(IS_SSN_UNIQUE);
+        statement.setInt(1,SSN);
+
+            ResultSet resultSet = statement.executeQuery();
+           try {
+               while (resultSet.next())
+                   if(resultSet.getInt(1) == SSN)
+                   return true;
+               else
+                   return false;
+           }
+           finally {
+            connection.close();
+           }
+
+           return false;
+    }
 
     //validating password
     public static boolean isPasswordValid(String username, String password) throws ClassNotFoundException, SQLException {
@@ -56,32 +80,38 @@ public class Customer_dataAccess {
         Connection connection = DriverManager.getConnection(URL, getDbUserName(), getDbPassword());
         System.out.println("DB Connected");
 
-        //created a new entry in the Users DB
-        PreparedStatement statement = connection.prepareStatement(REGISTER_NEW_CUSTOMER);
+        try {
+            //created a new entry in the Users DB
+            PreparedStatement statement = connection.prepareStatement(REGISTER_NEW_CUSTOMER);
 
-        statement.setInt(1, customer.getCustomer_id());
-        statement.setString(2, customer.getUserName());
-        statement.setString(3, customer.getUserPassword());
-        statement.setString(4, customer.getFirstName());
-        statement.setString(5, customer.getLastName());
-        statement.setString(6, customer.getStreetAddress());
-        System.out.println(customer.getStreetAddress());
-        statement.setString(7, customer.getCityAddress());
-        statement.setString(8, customer.getStateAddress());
-        System.out.println(customer.getStateAddress());
-        statement.setString(9, customer.getZipAddress());
-        statement.setString(10, customer.getUserPhoneNumber());
-        statement.setString(11, customer.getUserEmail());
-        statement.setString(12, customer.getSecurityQuestion());
-        statement.setString(13, customer.getSecurityAnswer());
-        statement.setBoolean(14,false);
+            statement.setInt(1, customer.getCustomer_id());
+            statement.setString(2, customer.getUserName());
+            statement.setString(3, customer.getUserPassword());
+            statement.setString(4, customer.getFirstName());
+            statement.setString(5, customer.getLastName());
+            statement.setString(6, customer.getStreetAddress());
+            System.out.println(customer.getStreetAddress());
+            statement.setString(7, customer.getCityAddress());
+            statement.setString(8, customer.getStateAddress());
+            System.out.println(customer.getStateAddress());
+            statement.setString(9, customer.getZipAddress());
+            statement.setString(10, customer.getUserPhoneNumber());
+            statement.setString(11, customer.getUserEmail());
+            statement.setString(12, customer.getSecurityQuestion());
+            statement.setString(13, customer.getSecurityAnswer());
+            statement.setBoolean(14, false);
 
-        //execute Query
-        statement.executeUpdate();
-        System.out.println("new customer added to DB");
-
-        connection.close();
-
+            //execute Query
+            statement.executeUpdate();
+            System.out.println("new customer added to DB");
+        }
+        catch (SQLException ex){
+            System.out.println("error in Cusotmer DB SQL");
+            throw new SQLException("error registering");
+        }
+        finally {
+            connection.close();
+        }
     }
 
     //getting a list of customers for tableview population
@@ -129,7 +159,6 @@ public class Customer_dataAccess {
             //fetching data from DB, creating anonymous Flight obj using FlightBuilder
             //then adding flights to ArrayList <Flights>
             activeCustomer.setCustomer_id(rs.getInt(1));
-            System.out.println(activeCustomer.getCustomer_id());
         }
         connection.close();
 
