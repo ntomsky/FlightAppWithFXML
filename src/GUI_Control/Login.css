@@ -42,7 +42,7 @@ gray quick silver 9DA3A4
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
 }
 .text-field {
-    -fx-font-size: 12px;
+    -fx-font-size: 14px;
     -fx-font-family: "Calibri Light";
     -fx-font-weight: bold;
 }

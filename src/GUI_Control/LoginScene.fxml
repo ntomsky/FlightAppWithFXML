@@ -15,15 +15,12 @@
       <VBox layoutX="167.0" layoutY="111.0" onKeyPressed="#userLogin" prefHeight="232.0" prefWidth="167.0">
          <children>
       
-            <TextField fx:id="loginUsername" alignment="CENTER" prefHeight="35.0" prefWidth="173.0" promptText="username" text="admin">
-               <font>
-                  <Font name="Adobe Gurmukhi" size="18.0" />
-               </font>
+            <TextField fx:id="loginUsername" alignment="CENTER" prefHeight="35.0" prefWidth="173.0" promptText="username" styleClass="text-field">
                <VBox.margin>
                   <Insets top="5.0" />
                </VBox.margin>
             </TextField>
-            <PasswordField fx:id="loginPwd" alignment="CENTER" prefHeight="35.0" prefWidth="173.0" promptText="password" text="admin">
+            <PasswordField fx:id="loginPwd" alignment="CENTER" prefHeight="35.0" prefWidth="173.0" promptText="password">
                <font>
                   <Font name="Adobe Gurmukhi" size="18.0" />
                </font>

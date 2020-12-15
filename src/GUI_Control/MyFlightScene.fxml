@@ -19,16 +19,15 @@
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="800.0">
          <children>
             <VBox layoutX="-2.0" layoutY="223.0" prefHeight="77.0" prefWidth="600.0" />
-            <TableView fx:id="myFlightsTableView" layoutX="9.0" prefHeight="270.0" prefWidth="780.0">
+            <TableView fx:id="myFlightsTableView" layoutX="9.0" layoutY="3.0" prefHeight="267.0" prefWidth="778.0">
               <columns>
-                  <TableColumn prefWidth="106.0" text="Confirmation #" />
                 <TableColumn fx:id="fligthtNumCol" prefWidth="68.0" text="Flight ID" />
-                <TableColumn fx:id="airlineCol" prefWidth="98.0" text="Airline" />
-                  <TableColumn fx:id="departCityCol" prefWidth="125.0" text="From" />
-                  <TableColumn fx:id="arrivalCityCol" prefWidth="112.0" text="To" />
-                  <TableColumn fx:id="departureDateCol" minWidth="0.0" prefWidth="78.0" text="Date" />
-                  <TableColumn fx:id="takeOffLandCol" minWidth="0.0" prefWidth="85.0" text="Time" />
-                  <TableColumn fx:id="flightTimeCol" minWidth="1.0" prefWidth="106.0" text="Flight Time" />
+                <TableColumn fx:id="airlineCol" prefWidth="140.0" text="Airline" />
+                  <TableColumn fx:id="departCityCol" prefWidth="140.0" text="From" />
+                  <TableColumn fx:id="arrivalCityCol" prefWidth="140.0" text="To" />
+                  <TableColumn fx:id="departureDateCol" minWidth="0.0" prefWidth="109.0" text="Date" />
+                  <TableColumn fx:id="takeOffLandCol" minWidth="0.0" prefWidth="86.0" text="Time" />
+                  <TableColumn fx:id="flightTimeCol" minWidth="1.0" prefWidth="94.0" text="Flight Time" />
               </columns>
             </TableView>
             <HBox layoutX="274.0" layoutY="300.0" prefHeight="49.0" prefWidth="250.0">

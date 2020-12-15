@@ -11,7 +11,7 @@ public class DBQueries {
     //usename and password validation queries
     public static final String USERNAME_VALIDATION = "SELECT Username from Users where Username = ?;";
     public static final String PASSWORD_VALIDATION = "SELECT password from Users where Username = ?;";
-    public static final String GET_ID= "SELECT SSN from Users where Username = ?;";
+    public static final String INITIALIZE= "SELECT SSN, Secret_Answer, password FROM Users where Username = ?;";
     public static final String IS_SSN_UNIQUE= "SELECT SSN from Users where SSN = ?;";
 
 
@@ -55,7 +55,7 @@ public class DBQueries {
     //password reset query
     public static final String RETRIEVE_SECRET_QUESTION = "SELECT secret_Q FROM Users WHERE username = ?;";
     public static final String MATCH_SECRET_ANSWER = "SELECT secret_answer FROM Users WHERE username = ?;";
-    public static final String RESET_PASSWORD = " UPDATE users SET password = ? WHERE username = ?;";
+    public static final String GET_PASSWORD = "SELECT password FROM Users WHERE s = ?;";
 
     //flight booking queries
     public static final String CHECK_DOUBLE_BOOKING = " SELECT SSN FROM Booked_Flights WHERE Flight_ID = ? ;";

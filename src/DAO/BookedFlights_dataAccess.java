@@ -24,8 +24,9 @@ public class BookedFlights_dataAccess {
 
             while (bookedReservation.next()) {
                 //checks returned SSN \with activeCustomer's id
-                if (bookedReservation.getString(1).equals(((Customer) user).getCustomer_id())) ;
-                return -2;
+                if (bookedReservation.getInt(1)==(((Customer) user).getCustomer_id())) {
+                    return -2;
+                }
 
             }
         } catch (SQLException throwables) {
@@ -65,7 +66,7 @@ public class BookedFlights_dataAccess {
             throw new SQLException("error in booking query");
         }
 
-        //update capacity of the flight to -= 1;
+        //update capacity of the flight to current - 1;
         try {
             PreparedStatement updateCap = connection.prepareStatement(DEBIT_SEAT);
             updateCap.setInt(1, flightID);

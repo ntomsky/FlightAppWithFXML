@@ -20,12 +20,12 @@ import java.sql.SQLException;
 
 public class Controller {
 
-    //Button to MyFlight Scene
-    @FXML
-    private Button MyFlightsBtn;
-    //book new flight button
-    @FXML
-    private Button bookNewFlightBtn;
+    //Main Menu Button
+    @FXML private Button MyFlightsBtn;
+    @FXML private Button bookNewFlightBtn;
+    @FXML private Button logOutBtn;
+    @FXML private Button deleteMyAccountBtn;
+
 
     //fields from Registration Scene
     @FXML
@@ -56,14 +56,39 @@ public class Controller {
     private Button completeRegistration;
 
     //Button handler
-    public void handleButtonAction(javafx.event.ActionEvent actionEvent) throws IOException {
+    public void handleButtonAction(javafx.event.ActionEvent actionEvent) throws Exception {
 
         if(actionEvent.getSource() == MyFlightsBtn) {
+            //toMyflights page
             MyFlightSceneController.startMyFlight(MyFlightsBtn);
         }
+        //go to password reset
         else if(actionEvent.getSource() == resetPassord) {
-            PasswordResetController.startPasswordReset(resetPassord);
+            PasswordResetController.startPasswordReset(resetPassord, "PasswordResetScene.fxml");
         }
+        //logout
+        else if(actionEvent.getSource() == logOutBtn) {
+
+            CurrentUser.registerCurrentUser(null);
+            //closing scene
+            Stage stage = (Stage) logOutBtn.getScene().getWindow();
+            stage.close();
+            //move to main screen
+            Stage primaryStage = new Stage();
+            new Main().start(primaryStage);
+
+        }
+            else
+            try{
+                Customer_dataAccess.deleteCustomer(((Customer)CurrentUser.getCurrentUser()).getCustomer_id());
+                PopUpAlertBox.display("Confirmation", "Your account has been deleted");
+                Stage primaryStage = new Stage();
+                new Main().start(primaryStage);
+            }
+            catch (Exception ex){
+                ex.getMessage();
+            }
+            //delete account
 
         //else call for flight cancellation method
     }
@@ -84,7 +109,9 @@ public class Controller {
                 PopUpAlertBox.display("Invalid password", "Try again or Select Reset Password");
                 return;
             } else if (Admin_dataAccess.isAdmin(username)) {
+
                 //TODO create admin instance here
+                //Creates an Global oob of CurrentUSer from Admin
                 Admin activeAdmin = new Admin(username);
                 CurrentUser.registerCurrentUser(activeAdmin);
                 transitionToAdminScene();
@@ -103,6 +130,7 @@ public class Controller {
                     return;
                 }
                 System.out.println("valid username and password");
+                System.out.println(((Customer)CurrentUser.getCurrentUser()).getCustomer_id());
                 transitionToMainMenu(loginBtn);
                 break;
             }
@@ -209,7 +237,6 @@ public class Controller {
     //to main Menu transition
     public void transitionToMainMenu(Button btn) throws IOException {
         //changing to new Stage
-//        MainMenuController.MainMenuInitializer(btn);
         Stage stage = (Stage) btn.getScene().getWindow();
         stage.close();
         Stage primaryStage = new Stage();

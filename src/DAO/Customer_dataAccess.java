@@ -1,6 +1,7 @@
 package DAO;
 
 import Domain.*;
+import org.omg.CORBA.INITIALIZE;
 
 import static DAO.DBQueries.*;
 import java.sql.*;
@@ -139,7 +140,8 @@ public class Customer_dataAccess {
 
         return listOfCustomers;
     }
- //getting a list of customers for tableview population
+
+    //getting a list of customers for tableview population
     public static Customer initializeCustomer(Customer activeCustomer) throws ClassNotFoundException, SQLException {
 
         Class.forName("com.mysql.cj.jdbc.Driver");
@@ -147,7 +149,7 @@ public class Customer_dataAccess {
         System.out.println("DB Connected");
 
         //created a new entry in the Users DB
-        PreparedStatement statement = connection.prepareStatement(GET_ID);
+        PreparedStatement statement = connection.prepareStatement(INITIALIZE);
 
         statement.setString(1,activeCustomer.getUserName());
 
@@ -159,6 +161,8 @@ public class Customer_dataAccess {
             //fetching data from DB, creating anonymous Flight obj using FlightBuilder
             //then adding flights to ArrayList <Flights>
             activeCustomer.setCustomer_id(rs.getInt(1));
+            activeCustomer.setSecurityAnswer(rs.getString(2));
+            activeCustomer.setUserPassword(rs.getString(3));
         }
         connection.close();
 
@@ -178,7 +182,64 @@ public class Customer_dataAccess {
         connection.close();
     }
 
-
-
     //new method for password reset
+
+    public static String getSecurityQ(String username) throws ClassNotFoundException, SQLException {
+        String secretQ = null;
+
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection connection = DriverManager.getConnection(URL, getDbUserName(), getDbPassword());
+        System.out.println("DB Connected");
+
+        PreparedStatement statement = connection.prepareStatement(RETRIEVE_SECRET_QUESTION);
+        statement.setString(1,username);
+
+        ResultSet rs = statement.executeQuery();
+
+        if(rs.next()){
+            secretQ = rs.getString(1);
+        }
+        connection.close();
+
+        return secretQ;
+    }
+    public static String getPassword(String username) throws ClassNotFoundException, SQLException {
+        String password = null;
+
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection connection = DriverManager.getConnection(URL, getDbUserName(), getDbPassword());
+        System.out.println("DB Connected");
+
+        PreparedStatement statement = connection.prepareStatement(RETRIEVE_SECRET_QUESTION);
+        statement.setString(1,username);
+
+        ResultSet rs = statement.executeQuery();
+
+        if(rs.next()){
+            password = rs.getString(1);
+        }
+        connection.close();
+
+        return password;
+    }
+    public static boolean matchSecurityAnswer(String answer) throws ClassNotFoundException, SQLException {
+
+
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection connection = DriverManager.getConnection(URL, getDbUserName(), getDbPassword());
+        System.out.println("DB Connected");
+
+        PreparedStatement statement = connection.prepareStatement(MATCH_SECRET_ANSWER);
+        statement.setString(1,answer);
+
+        ResultSet rs = statement.executeQuery();
+
+        if(rs.next()){
+            answer.equals(rs.getString(1));
+            return true;
+        }
+        connection.close();
+
+        return false;
+    }
 }

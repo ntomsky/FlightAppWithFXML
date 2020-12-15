@@ -13,10 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import java.io.IOException;
@@ -33,6 +30,7 @@ public class BookNewFlightController implements Initializable {
     @FXML private TableView<Flight> flightScheduleTableView;
     @FXML private TextField filteredWhereField;
     @FXML private TextField filteredFromField;
+    @FXML private DatePicker filteredDateField;
     @FXML private TableColumn<Flight, Integer> fligthtNumCol;
     @FXML private TableColumn<Flight, Integer> airlineCol;
     @FXML private TableColumn<Flight, String> departCityCol;
@@ -89,21 +87,18 @@ public class BookNewFlightController implements Initializable {
                             return true;
                         }
 
-                        //compare departure and arrival cities
+                        //compare departure and typed city
                         String lowerCaseFiler = newValue.toLowerCase();
 
                         if(flight.getDepartureCity().toLowerCase().contains(lowerCaseFiler)){
                             return true;//filter matches first letter of a city
                         }
-//                        else if(flight.getArrivalCity().toLowerCase().contains(lowerCaseFiler)){
-//                            return true;//matches arrival city name
-//                        }
                         else
                             return false;
-
-
                     });
             });
+
+            //this portion monitors where search field with listener
             filteredWhereField.textProperty().addListener((observable, oldValue, newValue) ->{
                     filteredData.setPredicate(flight -> {
 
@@ -113,13 +108,34 @@ public class BookNewFlightController implements Initializable {
                             return true;
                         }
 
-                        //compare departure and arrival cities
+                        //compare value with arrival cities
                         String lowerCaseFiler = newValue.toLowerCase();
 
-//                        if(flight.getDepartureCity().toLowerCase().contains(lowerCaseFiler)){
-//                            return true;//filter matches first letter of a city
-//                        }
                         if(flight.getArrivalCity().toLowerCase().contains(lowerCaseFiler)){
+                            return true;//matches arrival city name
+                        }
+                        else
+                            return false;
+
+
+                    });
+            });
+            // this part is for filtered Date search, it updates the search based
+            //on picked date from Date Picker
+        filteredDateField.valueProperty().addListener((observable, oldValue, newValue) ->{
+                    filteredData.setPredicate(flight -> {
+
+                        //if DatePicker is empty show all
+                        if(newValue == null)
+                        {
+                            return true;
+                        }
+
+                        //create a new value form picked dat
+                        LocalDate pickedDate = newValue;
+
+                       //compare with flight date
+                        if(flight.getDepartureDate().isEqual(pickedDate)){
                             return true;//matches arrival city name
                         }
                         else
@@ -156,6 +172,8 @@ public class BookNewFlightController implements Initializable {
 
     //Transition back to main
      public void setBackToMainButton() throws IOException {
+         Stage stage = (Stage) backToMainButton.getScene().getWindow();
+         stage.close();
         MainMenuController.MainMenuInitializer(backToMainButton);
     }
 
@@ -164,7 +182,6 @@ public class BookNewFlightController implements Initializable {
         //assigning selected row to a new object
         if(event.getSource() == bookFlightBtn) {
             selectedFlight = flightScheduleTableView.getSelectionModel().getSelectedItem();
-
 
             try {
                 //sending request to DB for processing
