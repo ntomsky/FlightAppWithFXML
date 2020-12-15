@@ -7,9 +7,77 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@Login.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI_Control.Controller">
+<AnchorPane prefHeight="550.0" prefWidth="600.0" stylesheets="@Login.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI_Control.Controller">
    <children>
-      <VBox layoutX="194.0" layoutY="6.0" prefHeight="384.0" prefWidth="213.0">
+      <HBox layoutX="345.0" layoutY="6.0" />
+      <Button fx:id="backToLogInBtn" layoutX="202.0" layoutY="457.0" mnemonicParsing="false" onAction="#backToLogIn" prefHeight="35.0" prefWidth="69.0" text="Back">
+         <font>
+            <Font name="Adobe Gurmukhi" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="completeRegistration" layoutX="285.0" layoutY="457.0" mnemonicParsing="false" onAction="#processRegistration" prefHeight="35.0" prefWidth="119.0" text="Register">
+         <font>
+            <Font name="Adobe Gurmukhi" size="18.0" />
+         </font>
+      </Button>
+      <VBox layoutX="38.0" layoutY="61.0" prefHeight="396.0" prefWidth="247.0">
+         <children>
+            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="26.0" prefWidth="247.0" text="Username">
+               <VBox.margin>
+                  <Insets right="10.0" />
+               </VBox.margin></Label>
+            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="30.0" prefWidth="247.0" text="Label:" textAlignment="RIGHT">
+               <VBox.margin>
+                  <Insets right="10.0" />
+               </VBox.margin></Label>
+            <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="247.0" text="First Name:">
+               <VBox.margin>
+                  <Insets right="10.0" />
+               </VBox.margin></Label>
+            <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="247.0" text="Last Name:">
+               <VBox.margin>
+                  <Insets right="10.0" />
+               </VBox.margin></Label>
+            <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="247.0" text="Social Security:">
+               <VBox.margin>
+                  <Insets right="10.0" />
+               </VBox.margin></Label>
+            <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="247.0" text="Address:">
+               <VBox.margin>
+                  <Insets right="10.0" />
+               </VBox.margin></Label>
+            <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="247.0" text="City Abbreviation:">
+               <VBox.margin>
+                  <Insets right="10.0" />
+               </VBox.margin></Label>
+            <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="247.0" text="State:">
+               <VBox.margin>
+                  <Insets right="10.0" />
+               </VBox.margin></Label>
+            <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="247.0" text="Zip Code:">
+               <VBox.margin>
+                  <Insets right="10.0" />
+               </VBox.margin></Label>
+            <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="247.0" text="Phone Number:">
+               <VBox.margin>
+                  <Insets right="10.0" />
+               </VBox.margin></Label>
+            <Label alignment="CENTER_RIGHT" prefHeight="37.0" prefWidth="248.0" text="Email:">
+               <VBox.margin>
+                  <Insets right="10.0" />
+               </VBox.margin></Label>
+            <Label alignment="CENTER_RIGHT" prefHeight="31.0" prefWidth="248.0" text="Security Question:">
+               <VBox.margin>
+                  <Insets right="10.0" />
+               </VBox.margin>
+            </Label>
+            <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="247.0" text="Security Answer">
+               <VBox.margin>
+                  <Insets right="10.0" />
+               </VBox.margin>
+            </Label>
+         </children></VBox>
+      <VBox layoutX="285.0" layoutY="6.0" prefHeight="384.0" prefWidth="213.0">
          <children>
             <TextField fx:id="newCustUsername" alignment="CENTER" prefHeight="19.0" prefWidth="203.0" promptText="username" text="user1">
                <font>
@@ -157,16 +225,9 @@
                </VBox.margin>
             </TextField>
          </children>
+         <padding>
+            <Insets top="50.0" />
+         </padding>
       </VBox>
-      <Button fx:id="backToLogInBtn" layoutX="27.0" layoutY="340.0" mnemonicParsing="false" onAction="#backToLogIn" prefHeight="27.0" prefWidth="146.0" text="Back">
-         <font>
-            <Font name="Adobe Gurmukhi" size="18.0" />
-         </font>
-      </Button>
-      <Button fx:id="completeRegistration" layoutX="430.0" layoutY="340.0" mnemonicParsing="false" onAction="#processRegistration" prefHeight="27.0" prefWidth="146.0" text="Register">
-         <font>
-            <Font name="Adobe Gurmukhi" size="18.0" />
-         </font>
-      </Button>
    </children>
 </AnchorPane>
