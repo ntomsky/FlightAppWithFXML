@@ -35,25 +35,21 @@ public class Controller {
     loginPwd;
 
     //securityQuestion ComboBox from Registration screen
-    @FXML
-    private ComboBox <String> newCustSecQuestion;
+    @FXML private ComboBox <String> newCustSecQuestion;
 
     //Registration Screen Button
     @FXML
     private Button goToRegistrationBtn;
 
     //Back to Login Screen Button
-    @FXML
-    private Button backToLogInBtn;
+    @FXML private Button backToLogInBtn;
 
     //Login Menu Button
-    @FXML
-    private Button loginBtn;
-    @FXML
-    private Button resetPassord;
+    @FXML private Button loginBtn;
+    @FXML private Button resetPassord;
 
-    @FXML
-    private Button completeRegistration;
+    //Submit registration button
+    @FXML private Button completeRegistration;
 
     //Button handler
     public void handleButtonAction(javafx.event.ActionEvent actionEvent) throws Exception {
@@ -66,20 +62,24 @@ public class Controller {
         else if(actionEvent.getSource() == resetPassord) {
             PasswordResetController.startPasswordReset(resetPassord, "PasswordResetScene.fxml");
         }
-        //logout
+        //logout function
         else if(actionEvent.getSource() == logOutBtn) {
 
+            //set logged in user to null
             CurrentUser.registerCurrentUser(null);
+
             //closing scene
             Stage stage = (Stage) logOutBtn.getScene().getWindow();
             stage.close();
-            //move to main screen
+
+            //move to Login page screen
             Stage primaryStage = new Stage();
             new Main().start(primaryStage);
 
         }
             else
             try{
+                //delete account
                 Customer_dataAccess.deleteCustomer(((Customer)CurrentUser.getCurrentUser()).getCustomer_id());
                 PopUpAlertBox.display("Confirmation", "Your account has been deleted");
                 Stage primaryStage = new Stage();
@@ -88,36 +88,36 @@ public class Controller {
             catch (Exception ex){
                 ex.getMessage();
             }
-            //delete account
-
-        //else call for flight cancellation method
     }
 
     //User Login from the Login Screen
     public void userLogin() throws IOException, SQLException, ClassNotFoundException {
         String username = loginUsername.getText();
         String password = loginPwd.getText();
-        while(true) {
+
             //validation steps
 
             //method to db that returns null, customer or Admin
-
             if (!isUsernameValid(username)) {
                 PopUpAlertBox.display("Invalid username", "Try again or Select Register");
                 return;
-            } else if (!isPasswordValid(username, password)) {
+            }
+            // call to db to check password based on username
+            else if (!isPasswordValid(username, password)) {
                 PopUpAlertBox.display("Invalid password", "Try again or Select Reset Password");
                 return;
-            } else if (Admin_dataAccess.isAdmin(username)) {
-
+            }
+            //if above true, checks if admin
+            else if (Admin_dataAccess.isAdmin(username)) {
                 //TODO create admin instance here
                 //Creates an Global oob of CurrentUSer from Admin
                 Admin activeAdmin = new Admin(username);
                 CurrentUser.registerCurrentUser(activeAdmin);
                 transitionToAdminScene();
-                break;
 
-            } else {
+            }
+            //if above false, creates a customer instance
+            else {
                 Customer activeCustomer = new Customer(username);
                 try {
                     //this pulls ID from DB and then initiates a global Current customer obj
@@ -132,9 +132,7 @@ public class Controller {
                 System.out.println("valid username and password");
                 System.out.println(((Customer)CurrentUser.getCurrentUser()).getCustomer_id());
                 transitionToMainMenu(loginBtn);
-                break;
             }
-        }
     }
 
     //Registration Scene Method
@@ -187,7 +185,7 @@ public class Controller {
             return;
         }
 
-//            //create new Customer entity
+        //create new Customer entity
         Customer customer = new Customer((
                 EntryVerifiers.SSNtoDigits(newCustSSN.getText())),
                 newCustUsername.getText(),
@@ -217,7 +215,8 @@ public class Controller {
         stage.close();
 
 
-        //select   menu and message based on active user
+        //select next scene and message based on type of active user
+
         //if admin
         if ((CurrentUser.getCurrentUser() instanceof Admin)) {
             PopUpAlertBox.display("Registration Confirmed", "" + customer.getUserName() + " has been added");

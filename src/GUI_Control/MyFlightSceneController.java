@@ -23,16 +23,12 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ResourceBundle;
 
-import static DAO.FlightSchedule_dataAccess.deleteFlight;
 
 public class MyFlightSceneController implements Initializable {
     //My Booked Flight TableView Elements
-    @FXML private Button searchFlightButton;
     @FXML private TableView<Flight> myFlightsTableView;
-    @FXML private TextField filteredField;
     @FXML private TableColumn<Flight, Integer> fligthtNumCol;
     @FXML private TableColumn<Flight, Integer> airlineCol;
     @FXML private TableColumn<Flight, String> departCityCol;

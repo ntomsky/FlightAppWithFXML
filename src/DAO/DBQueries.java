@@ -52,10 +52,8 @@ public class DBQueries {
     public static final String DELETE_FLIGHT = "DELETE FROM Flight_Schedule WHERE flight_id = ?;";
     public static final String DELETE_CUSTOMER = "DELETE FROM Users WHERE SSN = ?;";
 
-    //password reset query
+    //password retrieve
     public static final String RETRIEVE_SECRET_QUESTION = "SELECT secret_Q FROM Users WHERE username = ?;";
-    public static final String MATCH_SECRET_ANSWER = "SELECT secret_answer FROM Users WHERE username = ?;";
-    public static final String GET_PASSWORD = "SELECT password FROM Users WHERE s = ?;";
 
     //flight booking queries
     public static final String CHECK_DOUBLE_BOOKING = " SELECT SSN FROM Booked_Flights WHERE Flight_ID = ? ;";

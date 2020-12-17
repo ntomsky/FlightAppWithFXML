@@ -10,6 +10,8 @@ import static DAO.DBQueries.*;
 import static DAO.DBQueries.getDbUserName;
 
 public class FlightSchedule_dataAccess {
+
+        //this method populates flights for tableviews
         public static ArrayList<Flight> getListOfFlights() throws ClassNotFoundException, SQLException {
 
         ArrayList<Flight> listOfFlights = new ArrayList<>();
@@ -48,6 +50,8 @@ public class FlightSchedule_dataAccess {
             //return an array of flights from FlightsSchedule table
         return listOfFlights;
         }
+
+        //pull airline id based on name
         public static int retrieveAirlineID(String AirlineName) throws SQLException, ClassNotFoundException {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connection = DriverManager.getConnection(URL, getDbUserName(), getDbPassword());
@@ -68,25 +72,8 @@ public class FlightSchedule_dataAccess {
             return -1;
 
         }
-        public static String retrieveAirlineName(int airlineID) throws SQLException, ClassNotFoundException {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(URL, getDbUserName(), getDbPassword());
-            System.out.println("DB Connected");
 
-            PreparedStatement statement = connection.prepareStatement(PULL_AIRLINE_NAME);
-            statement.setInt(1,airlineID);
-
-            //process the query
-            try {
-                ResultSet resultSet = statement.executeQuery();
-                if(resultSet.next())
-                    return (resultSet.getString(1));
-            }
-            finally {
-                connection.close();
-            }
-            return "NOT FOUND";
-        }
+        //admin's add new flight method
         public static void addNewFlight(Flight flight) throws SQLException, ClassNotFoundException {
             int airlineID = retrieveAirlineID(flight.getAirlineName());
 
@@ -111,6 +98,8 @@ public class FlightSchedule_dataAccess {
 
             connection.close();
         }
+
+        //checks uniqueness of the new flight_id
         public static boolean flightNumExists(String flightID) throws ClassNotFoundException, SQLException {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connection = DriverManager.getConnection(URL, getDbUserName(), getDbPassword());
@@ -125,6 +114,8 @@ public class FlightSchedule_dataAccess {
                 return true;
             return false;
         }
+
+        //deletion of a flight from DB
         public static void deleteFlight(int flightID) throws ClassNotFoundException, SQLException {
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 Connection connection = DriverManager.getConnection(URL, getDbUserName(), getDbPassword());

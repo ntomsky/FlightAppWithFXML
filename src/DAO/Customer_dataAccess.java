@@ -8,6 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class Customer_dataAccess {
+
     //Validating username
     public static boolean isUsernameValid(String credential) throws ClassNotFoundException, SQLException {
 
@@ -169,7 +170,7 @@ public class Customer_dataAccess {
         return activeCustomer;
     }
 
-    //Remove custome from the DB
+    //Remove customer from the DB
     public static void deleteCustomer(int customer_id) throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.cj.jdbc.Driver");
         Connection connection = DriverManager.getConnection(URL, getDbUserName(), getDbPassword());
@@ -183,7 +184,6 @@ public class Customer_dataAccess {
     }
 
     //new method for password reset
-
     public static String getSecurityQ(String username) throws ClassNotFoundException, SQLException {
         String secretQ = null;
 
@@ -202,44 +202,5 @@ public class Customer_dataAccess {
         connection.close();
 
         return secretQ;
-    }
-    public static String getPassword(String username) throws ClassNotFoundException, SQLException {
-        String password = null;
-
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection connection = DriverManager.getConnection(URL, getDbUserName(), getDbPassword());
-        System.out.println("DB Connected");
-
-        PreparedStatement statement = connection.prepareStatement(RETRIEVE_SECRET_QUESTION);
-        statement.setString(1,username);
-
-        ResultSet rs = statement.executeQuery();
-
-        if(rs.next()){
-            password = rs.getString(1);
-        }
-        connection.close();
-
-        return password;
-    }
-    public static boolean matchSecurityAnswer(String answer) throws ClassNotFoundException, SQLException {
-
-
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection connection = DriverManager.getConnection(URL, getDbUserName(), getDbPassword());
-        System.out.println("DB Connected");
-
-        PreparedStatement statement = connection.prepareStatement(MATCH_SECRET_ANSWER);
-        statement.setString(1,answer);
-
-        ResultSet rs = statement.executeQuery();
-
-        if(rs.next()){
-            answer.equals(rs.getString(1));
-            return true;
-        }
-        connection.close();
-
-        return false;
     }
 }

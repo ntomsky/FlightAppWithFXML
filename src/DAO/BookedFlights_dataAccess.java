@@ -79,6 +79,8 @@ public class BookedFlights_dataAccess {
         return 0;
 
     }
+
+   //flight cancellation method
     public static int cancelFlight(int flightID) throws ClassNotFoundException, SQLException {
 
         int cancelledResNum = -1;
