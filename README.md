@@ -21,3 +21,5 @@ Flight search and booking:
   
 GUI
 built using JavaFX, FXML and Splash screen
+
+DataBase: MySQL(local server)
